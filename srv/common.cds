@@ -1,5 +1,5 @@
 namespace scp.cloud;
-using IncidentService as service from './incidentservice';
+using PurchaseRequestService as service from './incidentservice';
 
 using {
     cuid
@@ -13,35 +13,54 @@ annotate cuid with {
     );
 }
 
-annotate service.Incidents with {
+annotate service.PurchaseRequests with {
     ID @UI.Hidden: true;
-    assignedIndividual @UI.Hidden : true;
+    contactPerson @UI.Hidden : true;
     identifier @(Common.FieldControl: identifierFieldControl);
 };
 
-annotate service.Incidents with {
-    incidentStatus @Common : {
-        Text            : incidentStatus.name,
+// Add criticality at entity level for row highlighting
+annotate service.PurchaseRequests with @UI.Criticality : priority.criticality;
+
+annotate service.PurchaseRequests with {
+    requestStatus @Common : {
+        Text            : requestStatus.name,
         TextArrangement : #TextOnly,
         ValueListWithFixedValues
     };
-  category @Common : {
-        Text            : category.name,
+    orderUnit @Common : {
+        Text            : orderUnit.name,
         TextArrangement : #TextOnly,
-        //insert your value list here       
+        ValueListWithFixedValues
+    };
+    currency @Common : {
+        Text            : currency.name,
+        TextArrangement : #TextOnly,
+        ValueListWithFixedValues
     };  
-  priority @Common : {
+    priority @Common : {
         Text            : priority.name,
         TextArrangement : #TextOnly,
         ValueListWithFixedValues
     };
+    supplier @Common : {
+        Text            : supplier.name,
+        TextArrangement : #TextOnly
+    };
 };
 
-annotate service.Category with {
+annotate service.OrderUnit with {
     code @Common : {
         Text            : name,
         TextArrangement : #TextOnly
-    }    @title :  'Category'
+    }    @title :  'Order Unit'
+};
+
+annotate service.Currency with {
+    code @Common : {
+        Text            : name,
+        TextArrangement : #TextOnly
+    }    @title :  'Currency'
 };
 
 annotate service.Priority with {
@@ -49,13 +68,21 @@ annotate service.Priority with {
         Text            : name,
         TextArrangement : #TextOnly
     }    @title :  'Priority'
+         @UI.ValueCriticality : criticality;
 };
 
-annotate service.IncidentStatus with {
+annotate service.RequestStatus with {
     code @Common : {
         Text            : name,
         TextArrangement : #TextOnly
-    }    @title :  'Incident Status'
+    }    @title :  'Request Status'
+};
+
+annotate service.Supplier with {
+    ID @Common : {
+        Text            : name,
+        TextArrangement : #TextOnly
+    }    @title :  'Supplier'
 };
 
 annotate service.Individual with @(Communication.Contact : {

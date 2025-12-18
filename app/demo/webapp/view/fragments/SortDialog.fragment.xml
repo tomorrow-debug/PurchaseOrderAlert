@@ -1,0 +1,33 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <ViewSettingsDialog
+        id="sortDialog"
+        title="{i18n>sortDialogTitle}"
+        confirm=".onConfirmSort">
+        
+        <sortItems>
+            <ViewSettingsItem
+                key="identifier"
+                text="{i18n>prNumber}"
+                selected="false"/>
+            <ViewSettingsItem
+                key="priority_code"
+                text="{i18n>priority}"
+                selected="true"/>
+            <ViewSettingsItem
+                key="requestStatus_code"
+                text="{i18n>status}"/>
+            <ViewSettingsItem
+                key="deliveryDate"
+                text="{i18n>deliveryDate}"/>
+            <ViewSettingsItem
+                key="totalValue"
+                text="{i18n>totalValue}"/>
+            <ViewSettingsItem
+                key="material"
+                text="{i18n>material}"/>
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

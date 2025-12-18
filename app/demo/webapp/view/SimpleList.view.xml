@@ -1,0 +1,304 @@
+<mvc:View
+    controllerName="demo.purchaserequest.controller.SimpleList"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:rowmodes="sap.ui.table.rowmodes"
+    height="100%"
+    displayBlock="true">
+    
+    <Page
+        id="simpleListPage"
+        title="{i18n>listTitle}"
+        showNavButton="false"
+        class="modernListPage fullWidthPage">
+
+        <content>
+            <!-- Wrapper with padding -->
+            <VBox class="pageContentWrapper">
+            <!-- Compact Filter Bar - No Header -->
+            <VBox class="compactFilterBar sapUiSmallMarginBottom">
+                <layout:Grid defaultSpan="L2 M3 S6" class="filterGrid">
+                    <VBox class="filterBox">
+                        <Label text="{i18n>prNumber}" class="filterLabel"/>
+                        <Input
+                            id="prNumberFilter"
+                            placeholder="{i18n>selectPrNumber}"
+                            liveChange=".onFilterChange"
+                            width="100%"
+                            showClearIcon="true"/>
+                    </VBox>
+
+                    <VBox class="filterBox">
+                        <Label text="{i18n>material}" class="filterLabel"/>
+                        <Input
+                            id="materialFilter"
+                            placeholder="{i18n>selectMaterial}"
+                            liveChange=".onFilterChange"
+                            width="100%"
+                            showClearIcon="true"/>
+                    </VBox>
+                    <!-- <VBox class="filterBox">
+                        <Label text="{i18n>priority}" class="filterLabel"/>
+                        <ComboBox
+                            id="priorityFilter"
+                            placeholder="{i18n>selectPriority}"
+                            change=".onFilterChange"
+                            width="100%">
+                            <items>
+                                <core:Item key="" text="{i18n>all}"/>
+                                <core:Item key="1_high" text="{i18n>priorityHigh}"/>
+                                <core:Item key="2_medium" text="{i18n>priorityMedium}"/>
+                                <core:Item key="3_low" text="{i18n>priorityLow}"/>
+                            </items>
+                        </ComboBox>
+                    </VBox> -->
+                    <VBox class="filterBox">
+                        <Label text="状态" class="filterLabel"/>
+                        <ComboBox
+                            id="statusFilter"
+                            placeholder="选择状态"
+                            change=".onFilterChange"
+                            width="100%">
+                            <items>
+                                <core:Item key="" text="全部"/>
+                                <core:Item key="new" text="新建"/>
+                                <core:Item key="in_process" text="处理中"/>
+                                <core:Item key="approved" text="已批准"/>
+                                <core:Item key="rejected" text="已拒绝"/>
+                            </items>
+                        </ComboBox>
+                    </VBox>
+                    <VBox class="filterBox">
+                        <Label text="请求日期范围" class="filterLabel"/>
+                        <DateRangeSelection
+                            id="dateFilter"
+                            placeholder="选择日期范围"
+                            change=".onFilterChange"
+                            width="100%"
+                            displayFormat="yyyy-MM-dd"/>
+                    </VBox>
+                    
+                    <!-- Button Container -->
+                    <VBox class="filterBox" justifyContent="End">
+                        <layoutData>
+                            <layout:GridData span="L4 M6 S12"/>
+                        </layoutData>
+                        <Label text=" " class="filterLabel"/>
+                        <HBox width="100%" justifyContent="SpaceBetween" alignItems="Center" class="buttonContainer">
+                            <Button
+                                text="重置"
+                                icon="sap-icon://clear-filter"
+                                press=".onClearFilters"
+                                type="Emphasized"
+                                class="clearFilterBtn"/>
+                            <Button
+                                text="AI 分析"
+                                id="aiAssistantBtn"
+                                icon="sap-icon://light-mode"
+                                tooltip="AI Assistant"
+                                type="Emphasized"
+                                press=".onAiPress"
+                                class="aiIconBtn"/>
+                        </HBox>
+                    </VBox>
+                </layout:Grid>
+            </VBox>
+
+            <!-- SAP Standard Grid Table -->
+            <table:Table
+                id="purchaseRequestsTable"
+                rows="{
+                    path: '/PurchaseRequests',
+                    parameters: {
+                        $expand: 'priority,requestStatus,supplier,orderUnit,currency'
+                    }
+                }"
+                selectionMode="MultiToggle"
+                selectionBehavior="RowSelector"
+                rowActionCount="1"
+                alternateRowColors="true"
+                enableColumnReordering="true"
+                enableCellFilter="true"
+                threshold="20"
+                noData="{i18n>noData}"
+                class="sapUiSmallMarginTop"
+                width="100%"
+                rowSelectionChange=".onRowSelectionChange">
+                
+                <table:rowMode>
+                    <rowmodes:Interactive rowCount="20"/>
+                </table:rowMode>
+                
+                <table:extension>
+                    <OverflowToolbar>
+                        <Title text="采购单据" level="H4"/>
+                        <ToolbarSpacer/>
+                        <Button 
+                            text="创建" 
+                            icon="sap-icon://create"
+                            press=".onCreatePress"
+                            type="Emphasized"/>
+                        <Button 
+                            text="编辑" 
+                            icon="sap-icon://edit"
+                            press=".onEditPress"
+                            type="Transparent"
+                            enabled="{= ${viewModel>/selectedItemsCount} === 1 }"/>
+                        <Button 
+                            text="删除" 
+                            icon="sap-icon://delete"
+                            press=".onDeletePress"
+                            type="Transparent"
+                            enabled="{= ${viewModel>/selectedItemsCount} > 0 }"/>
+                        <ToolbarSeparator/>
+                        <Button 
+                            text="导出到Excel" 
+                            icon="sap-icon://excel-attachment"
+                            press=".onExportToExcel"
+                            type="Transparent"/>
+                    </OverflowToolbar>
+                </table:extension>
+                
+                <table:columns>
+                    <table:Column width="8%" sortProperty="identifier" filterProperty="identifier" hAlign="Center">
+                        <Label text="{i18n>prNumber}"/>
+                        <table:template>
+                            <HBox justifyContent="Center" alignItems="Center">
+                                <core:Icon
+                                    src="sap-icon://flag"
+                                    color="{
+                                        path: 'priority/criticality',
+                                        formatter: '.formatter.formatPriorityColor'
+                                    }"
+                                    class="sapUiTinyMarginEnd"/>
+                                <Text text="{identifier}" textAlign="Center"/>
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="8%" sortProperty="requestDate" filterProperty="requestDate" hAlign="Center">
+                        <Label text="{i18n>requestDate}"/>
+                        <table:template>
+                            <Text text="{path: 'requestDate', formatter: '.formatter.formatDate'}" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="7%" sortProperty="material" filterProperty="material" hAlign="Center">
+                        <Label text="{i18n>material}"/>
+                        <table:template>
+                            <Text text="{material}" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="12%" sortProperty="shortText" filterProperty="shortText" hAlign="Center">
+                        <Label text="{i18n>description}"/>
+                        <table:template>
+                            <Text text="{shortText}" wrapping="false" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="8%" sortProperty="purchaseQuantity" hAlign="Center">
+                        <Label text="{i18n>quantity}"/>
+                        <table:template>
+                            <HBox justifyContent="Center" alignItems="Center">
+                                <ObjectNumber
+                                    number="{purchaseQuantity}"
+                                    unit="{orderUnit/code}"/>
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="8%" sortProperty="requestStatus/name" filterProperty="requestStatus/name" hAlign="Center">
+                        <Label text="{i18n>status}"/>
+                        <table:template>
+                            <HBox justifyContent="Center" alignItems="Center">
+                                <ObjectStatus
+                                    text="{requestStatus/name}"
+                                    state="Information"/>
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="9%" sortProperty="purchaseOrder" filterProperty="purchaseOrder" hAlign="Center">
+                        <Label text="{i18n>purchaseOrder}"/>
+                        <table:template>
+                            <Text text="{purchaseOrder}" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="5%" sortProperty="project" filterProperty="project" hAlign="Center">
+                        <Label text="{i18n>project}"/>
+                        <table:template>
+                            <Text text="{project}" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="10%" sortProperty="totalValue" hAlign="Center">
+                        <Label text="{i18n>totalValue}"/>
+                        <table:template>
+                            <HBox justifyContent="Center" alignItems="Center">
+                                <ObjectNumber
+                                    number="{
+                                        path: 'totalValue',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            maxFractionDigits: 2,
+                                            minFractionDigits: 2
+                                        }
+                                    }"
+                                    unit="{currency/code}"
+                                    emphasized="true"/>
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="9%" sortProperty="supplier/name" filterProperty="supplier/name" hAlign="Center">
+                        <Label text="{i18n>supplier}"/>
+                        <table:template>
+                            <Text text="{supplier/name}" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="8%" sortProperty="deliveryDate" hAlign="Center">
+                        <Label text="{i18n>deliveryDate}"/>
+                        <table:template>
+                            <Text text="{path: 'deliveryDate', formatter: '.formatter.formatDate'}" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column sortProperty="deliveryAddress" filterProperty="deliveryAddress" hAlign="Center">
+                        <Label text="{i18n>deliveryAddress}"/>
+                        <table:template>
+                            <Text text="{deliveryAddress}" wrapping="false" textAlign="Center"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+                
+                <table:rowActionTemplate>
+                    <table:RowAction>
+                        <table:items>
+                            <table:RowActionItem 
+                                type="Navigation" 
+                                press=".onItemPress"
+                                icon="sap-icon://detail-view"/>
+                        </table:items>
+                    </table:RowAction>
+                </table:rowActionTemplate>
+                
+            </table:Table>
+            </VBox>
+        </content>
+        
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Text id="itemCount" text="{i18n>itemCount}: {/PurchaseRequests/$count}"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,52 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <ViewSettingsDialog
+        id="filterDialog"
+        title="{i18n>filterDialogTitle}"
+        confirm=".onConfirmFilter"
+        reset=".onConfirmFilter">
+        
+        <filterItems>
+            <!-- Priority Filter -->
+            <ViewSettingsFilterItem
+                key="priority_code"
+                text="{i18n>priority}"
+                multiSelect="false">
+                <items>
+                    <ViewSettingsItem
+                        key="1_high"
+                        text="{i18n>priorityHigh}"/>
+                    <ViewSettingsItem
+                        key="2_medium"
+                        text="{i18n>priorityMedium}"/>
+                    <ViewSettingsItem
+                        key="3_low"
+                        text="{i18n>priorityLow}"/>
+                </items>
+            </ViewSettingsFilterItem>
+            
+            <!-- Status Filter -->
+            <ViewSettingsFilterItem
+                key="requestStatus_code"
+                text="{i18n>status}"
+                multiSelect="false">
+                <items>
+                    <ViewSettingsItem
+                        key="new"
+                        text="{i18n>statusNew}"/>
+                    <ViewSettingsItem
+                        key="in_process"
+                        text="{i18n>statusInProcess}"/>
+                    <ViewSettingsItem
+                        key="approved"
+                        text="{i18n>statusApproved}"/>
+                    <ViewSettingsItem
+                        key="rejected"
+                        text="{i18n>statusRejected}"/>
+                </items>
+            </ViewSettingsFilterItem>
+        </filterItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

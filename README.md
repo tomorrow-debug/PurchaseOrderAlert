@@ -1,37 +1,57 @@
-# Sample Service Used in Tutorials for SAP Fiori Elements Floorplans for OData V4
-
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/fiori-elements-incident-management)](https://api.reuse.software/info/github.com/SAP-samples/fiori-elements-incident-management)
+# Purchase Order Alert System
 
 ## Description
 
-This repository contains the sample OData V4 service material for the tutorials provided in the SAP Developer Center.
+This is a Purchase Request Management Application built with SAP Cloud Application Programming Model (CAP) and SAP Fiori Elements.
 
-## Description
+## Features
 
-Refer to the tutorial for further details.
+- Purchase Request management with draft support
+- Purchase flow process tracking
+- Purchase process timeline visualization
+- Advanced filtering and analytics
+- Multi-language support (English, Chinese)
 
-## Download and Installation
+## Prerequisites
 
-Refer to the tutorial for further details.
+- Node.js (>=20)
+- npm or pnpm
+- SAP Cloud Foundry CLI (for deployment)
 
-## Sample Solution
+## Installation
 
-The branch *sampleSolution* contains a sample solution which represents the final result after completion of all steps from the tutorials
+```bash
+npm install
+```
 
-* [Refine the List Report with Additional Annotations](https://developers.sap.com/tutorials/fiori-tools-cap-modify-list-report.html)
-* [Extend the Object Page by Adding More Functionality](https://developers.sap.com/tutorials/fiori-tools-cap-modify-object-page.html)
+## Running Locally
 
-After checking out the *sampleSolution* branch, execute the command *npm install* followed by the command *cds watch* to run the application.
+```bash
+npm run watch
+```
 
-## How to obtain support
+Or to open the demo app directly:
 
-Project is provided as is. Check out the [SAP Community](https://answers.sap.com) for additional questions.
+```bash
+npm run watch-demo
+```
 
-## Contributing
+## Deployment
 
-This project is only updated by SAP employees.
+Build and deploy to SAP BTP:
 
+```bash
+mbt build -t mta_archives
+cf deploy mta_archives/purchase-request-app_<version>.mtar
+```
+
+## Project Structure
+
+- `/db` - Database schema and data
+- `/srv` - Service definitions and implementations
+- `/app/demo` - Fiori Elements application
+- `/mta.yaml` - Multi-Target Application deployment descriptor
 
 ## License
 
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
+This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.

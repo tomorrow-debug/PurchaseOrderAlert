@@ -1,0 +1,104 @@
+id;processStep;stepStatus;criticality;stepStartDate;stepEndDate;purchaseRequest_ID
+1001;Request Created;Completed;3;2025-08-01;2025-08-02;2feec9ec-c192-48c6-8971-e3c4838cb861
+1002;Manager Approval;Completed;3;2025-08-02;2025-08-15;2feec9ec-c192-48c6-8971-e3c4838cb861
+1003;Budget Check;Completed;3;2025-08-15;2025-08-20;2feec9ec-c192-48c6-8971-e3c4838cb861
+1004;Final Approval;Completed;3;2025-08-20;2025-09-01;2feec9ec-c192-48c6-8971-e3c4838cb861
+1005;PO Created;Completed;3;2025-09-01;2025-09-05;2feec9ec-c192-48c6-8971-e3c4838cb861
+1006;In Delivery;In Progress;2;2025-09-05;2025-12-30;2feec9ec-c192-48c6-8971-e3c4838cb861
+2001;Request Created;Completed;3;2025-08-05;2025-08-06;919f1a94-0281-4226-ad3a-9148af4cb5d2
+2002;Manager Approval;Completed;3;2025-08-06;2025-08-18;919f1a94-0281-4226-ad3a-9148af4cb5d2
+2003;Budget Check;Completed;3;2025-08-18;2025-08-23;919f1a94-0281-4226-ad3a-9148af4cb5d2
+2004;Final Approval;Completed;3;2025-08-23;2025-09-03;919f1a94-0281-4226-ad3a-9148af4cb5d2
+2005;PO Created;Completed;3;2025-09-03;2025-09-07;919f1a94-0281-4226-ad3a-9148af4cb5d2
+2006;In Delivery;In Progress;2;2025-09-07;2025-12-25;919f1a94-0281-4226-ad3a-9148af4cb5d2
+3001;Request Created;Completed;3;2025-08-10;2025-08-11;f1c73988-bc83-4b5b-8169-80a946852c9a
+3002;Manager Approval;Completed;3;2025-08-11;2025-08-25;f1c73988-bc83-4b5b-8169-80a946852c9a
+3003;Budget Check;Completed;3;2025-08-25;2025-08-30;f1c73988-bc83-4b5b-8169-80a946852c9a
+3004;Final Approval;Completed;3;2025-08-30;2025-09-05;f1c73988-bc83-4b5b-8169-80a946852c9a
+3005;PO Created;Completed;3;2025-09-05;2025-09-10;f1c73988-bc83-4b5b-8169-80a946852c9a
+3006;In Delivery;In Progress;2;2025-09-10;2026-01-10;f1c73988-bc83-4b5b-8169-80a946852c9a
+4001;Request Created;Completed;3;2025-08-15;2025-08-16;4e507caf-c53d-445b-abf9-341839aec969
+4002;Manager Approval;Completed;3;2025-08-16;2025-08-28;4e507caf-c53d-445b-abf9-341839aec969
+4003;Budget Check;Completed;3;2025-08-28;2025-09-02;4e507caf-c53d-445b-abf9-341839aec969
+4004;Final Approval;Completed;3;2025-09-02;2025-09-08;4e507caf-c53d-445b-abf9-341839aec969
+4005;PO Created;Completed;3;2025-09-08;2025-09-12;4e507caf-c53d-445b-abf9-341839aec969
+4006;In Delivery;Completed;3;2025-09-12;2025-12-20;4e507caf-c53d-445b-abf9-341839aec969
+5001;Request Created;Completed;3;2025-08-20;2025-08-21;82165023-8db0-4a82-89df-a6bd6665b11a
+5002;Manager Approval;Completed;3;2025-08-21;2025-09-03;82165023-8db0-4a82-89df-a6bd6665b11a
+5003;Budget Check;Completed;3;2025-09-03;2025-09-07;82165023-8db0-4a82-89df-a6bd6665b11a
+5004;Final Approval;Completed;3;2025-09-07;2025-09-10;82165023-8db0-4a82-89df-a6bd6665b11a
+5005;PO Created;Completed;3;2025-09-10;2025-09-14;82165023-8db0-4a82-89df-a6bd6665b11a
+5006;In Delivery;In Progress;1;2025-09-14;2026-01-05;82165023-8db0-4a82-89df-a6bd6665b11a
+6001;Request Created;Completed;3;2025-08-25;2025-08-26;9e4f49cf-9ffb-499d-8813-1a2ed8b98605
+6002;Manager Approval;Completed;3;2025-08-26;2025-09-05;9e4f49cf-9ffb-499d-8813-1a2ed8b98605
+6003;Budget Check;In Progress;2;2025-09-05;2025-09-12;9e4f49cf-9ffb-499d-8813-1a2ed8b98605
+6004;Final Approval;Pending;2;2025-09-12;2025-12-15;9e4f49cf-9ffb-499d-8813-1a2ed8b98605
+7001;Request Created;Completed;3;2025-08-30;2025-08-31;6cf360ec-2dc5-40b9-b782-4b8a8b488dad
+7002;Manager Approval;In Progress;2;2025-08-31;2025-09-15;6cf360ec-2dc5-40b9-b782-4b8a8b488dad
+8001;Request Created;Completed;3;2025-09-02;2025-09-03;7cf360ec-2dc5-40b9-b782-4b8a8b488dad
+8002;Manager Approval;In Progress;2;2025-09-03;2025-09-18;7cf360ec-2dc5-40b9-b782-4b8a8b488dad
+9001;Request Created;Completed;3;2025-09-05;2025-09-06;8cf360ec-2dc5-40b9-b782-4b8a8b488dad
+9002;Manager Approval;Completed;3;2025-09-06;2025-09-15;8cf360ec-2dc5-40b9-b782-4b8a8b488dad
+9003;Budget Check;Completed;3;2025-09-15;2025-09-18;8cf360ec-2dc5-40b9-b782-4b8a8b488dad
+9004;Final Approval;Completed;3;2025-09-18;2025-09-20;8cf360ec-2dc5-40b9-b782-4b8a8b488dad
+9005;PO Created;Completed;3;2025-09-20;2025-09-23;8cf360ec-2dc5-40b9-b782-4b8a8b488dad
+9006;In Delivery;In Progress;2;2025-09-23;2026-01-20;8cf360ec-2dc5-40b9-b782-4b8a8b488dad
+10001;Request Created;Completed;3;2025-09-08;2025-09-09;9cf360ec-2dc5-40b9-b782-4b8a8b488dad
+10002;Manager Approval;Completed;3;2025-09-09;2025-09-18;9cf360ec-2dc5-40b9-b782-4b8a8b488dad
+10003;Budget Check;Completed;3;2025-09-18;2025-09-20;9cf360ec-2dc5-40b9-b782-4b8a8b488dad
+10004;Final Approval;Completed;3;2025-09-20;2025-09-22;9cf360ec-2dc5-40b9-b782-4b8a8b488dad
+10005;PO Created;Completed;3;2025-09-22;2025-09-25;9cf360ec-2dc5-40b9-b782-4b8a8b488dad
+10006;In Delivery;Completed;3;2025-09-25;2025-12-05;9cf360ec-2dc5-40b9-b782-4b8a8b488dad
+11001;Request Created;Completed;3;2025-08-12;2025-08-13;1df360ec-2dc5-40b9-b782-4b8a8b488dad
+11002;Manager Approval;Completed;3;2025-08-13;2025-08-27;1df360ec-2dc5-40b9-b782-4b8a8b488dad
+11003;Budget Check;Completed;3;2025-08-27;2025-09-01;1df360ec-2dc5-40b9-b782-4b8a8b488dad
+11004;Final Approval;Completed;3;2025-09-01;2025-09-06;1df360ec-2dc5-40b9-b782-4b8a8b488dad
+11005;PO Created;Completed;3;2025-09-06;2025-09-09;1df360ec-2dc5-40b9-b782-4b8a8b488dad
+11006;In Delivery;In Progress;2;2025-09-09;2025-12-28;1df360ec-2dc5-40b9-b782-4b8a8b488dad
+12001;Request Created;Completed;3;2025-08-18;2025-08-19;2df360ec-2dc5-40b9-b782-4b8a8b488dad
+12002;Manager Approval;Completed;3;2025-08-19;2025-09-02;2df360ec-2dc5-40b9-b782-4b8a8b488dad
+12003;Budget Check;Completed;3;2025-09-02;2025-09-06;2df360ec-2dc5-40b9-b782-4b8a8b488dad
+12004;Final Approval;Completed;3;2025-09-06;2025-09-11;2df360ec-2dc5-40b9-b782-4b8a8b488dad
+12005;PO Created;Completed;3;2025-09-11;2025-09-14;2df360ec-2dc5-40b9-b782-4b8a8b488dad
+12006;In Delivery;In Progress;2;2025-09-14;2026-01-08;2df360ec-2dc5-40b9-b782-4b8a8b488dad
+13001;Request Created;Completed;3;2025-08-22;2025-08-23;3df360ec-2dc5-40b9-b782-4b8a8b488dad
+13002;Manager Approval;Completed;3;2025-08-23;2025-09-05;3df360ec-2dc5-40b9-b782-4b8a8b488dad
+13003;Budget Check;Completed;3;2025-09-05;2025-09-09;3df360ec-2dc5-40b9-b782-4b8a8b488dad
+13004;Final Approval;Completed;3;2025-09-09;2025-09-14;3df360ec-2dc5-40b9-b782-4b8a8b488dad
+13005;PO Created;Completed;3;2025-09-14;2025-09-17;3df360ec-2dc5-40b9-b782-4b8a8b488dad
+13006;In Delivery;In Progress;2;2025-09-17;2025-12-22;3df360ec-2dc5-40b9-b782-4b8a8b488dad
+14001;Request Created;Completed;3;2025-08-26;2025-08-27;4df360ec-2dc5-40b9-b782-4b8a8b488dad
+14002;Manager Approval;Completed;3;2025-08-27;2025-09-08;4df360ec-2dc5-40b9-b782-4b8a8b488dad
+14003;Budget Check;Completed;3;2025-09-08;2025-09-12;4df360ec-2dc5-40b9-b782-4b8a8b488dad
+14004;Final Approval;Completed;3;2025-09-12;2025-09-17;4df360ec-2dc5-40b9-b782-4b8a8b488dad
+14005;PO Created;Completed;3;2025-09-17;2025-09-20;4df360ec-2dc5-40b9-b782-4b8a8b488dad
+14006;In Delivery;In Progress;1;2025-09-20;2026-01-12;4df360ec-2dc5-40b9-b782-4b8a8b488dad
+15001;Request Created;Completed;3;2025-08-31;2025-09-01;5df360ec-2dc5-40b9-b782-4b8a8b488dad
+15002;Manager Approval;Completed;3;2025-09-01;2025-09-14;5df360ec-2dc5-40b9-b782-4b8a8b488dad
+15003;Budget Check;In Progress;2;2025-09-14;2025-09-19;5df360ec-2dc5-40b9-b782-4b8a8b488dad
+16001;Request Created;Completed;3;2025-09-03;2025-09-04;6df360ec-2dc5-40b9-b782-4b8a8b488dad
+16002;Manager Approval;Completed;3;2025-09-04;2025-09-16;6df360ec-2dc5-40b9-b782-4b8a8b488dad
+16003;Budget Check;Completed;3;2025-09-16;2025-09-19;6df360ec-2dc5-40b9-b782-4b8a8b488dad
+16004;Final Approval;Completed;3;2025-09-19;2025-09-21;6df360ec-2dc5-40b9-b782-4b8a8b488dad
+16005;PO Created;Completed;3;2025-09-21;2025-09-24;6df360ec-2dc5-40b9-b782-4b8a8b488dad
+16006;In Delivery;In Progress;2;2025-09-24;2026-01-03;6df360ec-2dc5-40b9-b782-4b8a8b488dad
+17001;Request Created;Completed;3;2025-09-07;2025-09-08;7df360ec-2dc5-40b9-b782-4b8a8b488dad
+17002;Manager Approval;Completed;3;2025-09-08;2025-09-19;7df360ec-2dc5-40b9-b782-4b8a8b488dad
+17003;Budget Check;Completed;3;2025-09-19;2025-09-21;7df360ec-2dc5-40b9-b782-4b8a8b488dad
+17004;Final Approval;Completed;3;2025-09-21;2025-09-23;7df360ec-2dc5-40b9-b782-4b8a8b488dad
+17005;PO Created;Completed;3;2025-09-23;2025-09-26;7df360ec-2dc5-40b9-b782-4b8a8b488dad
+17006;In Delivery;Completed;3;2025-09-26;2025-12-12;7df360ec-2dc5-40b9-b782-4b8a8b488dad
+18001;Request Created;Completed;3;2025-09-10;2025-09-11;8df360ec-2dc5-40b9-b782-4b8a8b488dad
+18002;Manager Approval;In Progress;2;2025-09-11;2025-09-25;8df360ec-2dc5-40b9-b782-4b8a8b488dad
+19001;Request Created;Completed;3;2025-09-13;2025-09-14;9df360ec-2dc5-40b9-b782-4b8a8b488dad
+19002;Manager Approval;Completed;3;2025-09-14;2025-09-24;9df360ec-2dc5-40b9-b782-4b8a8b488dad
+19003;Budget Check;Completed;3;2025-09-24;2025-09-26;9df360ec-2dc5-40b9-b782-4b8a8b488dad
+19004;Final Approval;Completed;3;2025-09-26;2025-09-27;9df360ec-2dc5-40b9-b782-4b8a8b488dad
+19005;PO Created;Completed;3;2025-09-27;2025-09-29;9df360ec-2dc5-40b9-b782-4b8a8b488dad
+19006;In Delivery;Completed;3;2025-09-29;2025-12-08;9df360ec-2dc5-40b9-b782-4b8a8b488dad
+20001;Request Created;Completed;3;2025-09-15;2025-09-16;adf360ec-2dc5-40b9-b782-4b8a8b488dad
+20002;Manager Approval;Completed;3;2025-09-16;2025-09-26;adf360ec-2dc5-40b9-b782-4b8a8b488dad
+20003;Budget Check;Completed;3;2025-09-26;2025-09-28;adf360ec-2dc5-40b9-b782-4b8a8b488dad
+20004;Final Approval;Completed;3;2025-09-28;2025-09-29;adf360ec-2dc5-40b9-b782-4b8a8b488dad
+20005;PO Created;Completed;3;2025-09-29;2025-10-01;adf360ec-2dc5-40b9-b782-4b8a8b488dad
+20006;In Delivery;In Progress;2;2025-10-01;2026-01-30;adf360ec-2dc5-40b9-b782-4b8a8b488dad

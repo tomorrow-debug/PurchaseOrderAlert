@@ -1,0 +1,416 @@
+<mvc:View
+    controllerName="demo.purchaserequest.controller.Detail"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:card="sap.f.cards"
+    height="100%">
+    
+    <Page
+        id="detailPage"
+        title="{i18n>detailTitle}"
+        showNavButton="false"
+        class="detailPageModern">
+        
+        <content>
+            <f:DynamicPage id="dynamicPage" class="modernDynamicPage">
+                <!-- Content -->
+                <f:content>
+                    <VBox class="sapUiSmallMargin">
+                        <!-- Purchase Process Timeline (Gantt Chart) Section -->
+                        <!-- Purchase Process Timeline (compact) -->
+                        <VBox class="compactSection">
+                            <Title text="{i18n>purchaseProcessTimeline}" level="H3" class="sectionTitle"/>
+                            <core:Fragment fragmentName="demo.purchaserequest.view.fragments.GanttTimeline" type="XML"/>
+                        </VBox>
+
+                        <!-- AI Information Section -->
+                        <VBox class="compactSection sapUiSmallMarginBottom" 
+                              visible="{= ${ui>/ai/showInformation} !== false}">
+                            <!-- Header: Information Title and Generate Button -->
+                            <HBox width="100%" alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+                                <Title text="AI 建议" level="H3" class="aiInfoTitle"/>
+                                <Button
+                                    text="生成建议"
+                                    icon="sap-icon://lightbulb"
+                                    type="Emphasized"
+                                    press=".onGenerateSuggestion"
+                                    id="generateBtn"
+                                    class="aiGenerateBtn"/>
+                            </HBox>
+                            
+                            <!-- Content Box with Border -->
+                            <VBox width="100%" class="aiContentContainer">
+                                <!-- AI Generated Text Area -->
+                                <TextArea
+                                    value="{ui>/ai/generationText}"
+                                    editable="false"
+                                    rows="5"
+                                    width="100%"
+                                    placeholder="点击 Generate 按钮生成 AI 建议..."
+                                    class="aiTextArea"/>
+                                
+                                <!-- Warning Message Strip -->
+                                <MessageStrip
+                                    text="人工智能 (AI) 的结果基于多种来源生成，输出内容可能包含错误或不准确之处。请审慎审查所有生成结果，并根据需要进行调整。"
+                                    type="Warning"
+                                    showIcon="true"
+                                    class="sapUiSmallMarginTop aiWarningStrip"/>
+                                
+                                <!-- Checkbox and Buttons Row -->
+                                <HBox width="100%" alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMarginTop aiBottomRow">
+                                    <HBox alignItems="Center" class="aiDontShowContainer">
+                                        <CheckBox 
+                                            selected="{ui>/ai/disclaimerDontShowAgain}"
+                                            class="aiDisclaimerCheckbox"/>
+                                        <Text 
+                                            text="下次不再提示此消息"
+                                            wrapping="false"
+                                            class="aiDontShowText sapUiTinyMarginBegin"/>
+                                    </HBox>
+                                    <HBox alignItems="Center" class="aiButtonGroup">
+                                        <Button 
+                                            text="Ok" 
+                                            type="Emphasized"
+                                            press=".onAcceptAIResult"
+                                            class="sapUiTinyMarginEnd aiOkBtn"/>
+                                        <Button 
+                                            text="Cancel" 
+                                            type="Default"
+                                            press=".onCancelAIResult"
+                                            class="aiCancelBtn"/>
+                                    </HBox>
+                                </HBox>
+                            </VBox>
+                        </VBox>
+
+                        <!-- Email Configuration Section -->
+                        <VBox class="compactSection sapUiSmallMarginBottom">
+                            <!-- Custom Header with Expand Button on Right -->
+                            <HBox width="100%" alignItems="Center" justifyContent="SpaceBetween" class="emailConfigHeader">
+                                <Title text="配置电子邮件" level="H4" class="emailConfigTitle"/>
+                                <Button
+                                    icon="{= ${ui>/email/expanded} ? 'sap-icon://collapse' : 'sap-icon://expand'}"
+                                    type="Transparent"
+                                    press=".onToggleEmailPanel"
+                                    class="emailExpandBtn"/>
+                            </HBox>
+                            
+                            <!-- Collapsible Content -->
+                            <VBox visible="{ui>/email/expanded}" class="emailConfigContent">
+                                <VBox class="emailConfigInner">
+                                    <!-- To Recipients -->
+                                    <VBox class="sapUiSmallMarginBottom">
+                                        <Label text="To (Recipients)*" required="true" class="emailLabel"/>
+                                        <Input
+                                            value="{ui>/email/recipients}"
+                                            placeholder=""
+                                            class="emailInput sapUiTinyMarginTop"/>
+                                    </VBox>
+                                    
+                                    <!-- CC -->
+                                    <VBox class="sapUiSmallMarginBottom">
+                                        <Label text="CC (Carbon Copy)" class="emailLabel"/>
+                                        <Input
+                                            value="{ui>/email/cc}"
+                                            placeholder=""
+                                            class="emailInput sapUiTinyMarginTop"/>
+                                    </VBox>
+                                    
+                                    <!-- Subject -->
+                                    <VBox class="sapUiSmallMarginBottom">
+                                        <Label text="Subject*" required="true" class="emailLabel"/>
+                                        <Input
+                                            value="{ui>/email/subject}"
+                                            placeholder=""
+                                            class="emailInput sapUiTinyMarginTop"/>
+                                    </VBox>
+                                    
+                                    <!-- Email Content (Editable) -->
+                                    <VBox class="sapUiSmallMarginBottom">
+                                        <Label text="Email Content" class="emailLabel"/>
+                                        
+                                        <!-- Warning Message -->
+                                        <MessageStrip
+                                            text=" 本消息由 Joule 自动生成，请仔细审阅并根据需要进行调整。"
+                                            type="Warning"
+                                            showIcon="true"
+                                            class="sapUiTinyMarginTop"/>
+                                        
+                                        <!-- Email Content TextArea (Editable) -->
+                                        <TextArea
+                                            value="{ui>/email/content}"
+                                            rows="8"
+                                            width="100%"
+                                            class="emailContentArea sapUiTinyMarginTop"/>
+                                    </VBox>
+                                    
+                                    <!-- Send Email Button -->
+                                    <HBox justifyContent="End" class="sapUiSmallMarginTop">
+                                        <Button
+                                            text="Send Email"
+                                            icon="sap-icon://email"
+                                            type="Emphasized"
+                                            press=".onSendEmail"
+                                            class="sendEmailBtn"/>
+                                    </HBox>
+                                </VBox>
+                            </VBox>
+                        </VBox>
+
+                        <!-- Purchase Request Overview Section (optimized) -->
+                        <VBox class="compactSection">
+                            <Title text="{i18n>purchaseRequestOverview}" level="H3" class="sectionTitle"/>
+                            
+                            <!-- Use Grid Layout for better organization -->
+                            <layout:Grid 
+                                defaultSpan="XL4 L4 M6 S12" 
+                                class="sapUiSmallMarginTop overviewGrid">
+                                
+                                <!-- Basic Information Card -->
+                                <VBox class="overviewCard">
+                                    <layoutData>
+                                        <layout:GridData span="XL8 L8 M12 S12"/>
+                                    </layoutData>
+                                    <Title text="基础数据" level="H5" class="cardTitle"/>
+                                    <VBox class="sapUiTinyMarginTop">
+                                        <!-- Two-column layout for Basic Data -->
+                                        <layout:Grid 
+                                            defaultSpan="L6 M6 S12" 
+                                            hSpacing="2"
+                                            vSpacing="0.5"
+                                            class="sapUiSmallMarginBottom">
+                                            
+                                            <!-- Left Column -->
+                                            <VBox class="sapUiMediumMarginEnd">
+                                                <HBox justifyContent="SpaceBetween" class="fieldRow sapUiSmallMarginBottom">
+                                                    <Label text="采购单据类型:" class="fieldLabel" width="140px"/>
+                                                    <Text text="Standard PO (NB)" class="fieldValue"/>
+                                                </HBox>
+                                                <HBox justifyContent="SpaceBetween" class="fieldRow sapUiSmallMarginBottom">
+                                                    <Label text="供应商：" class="fieldLabel" width="140px"/>
+                                                    <Text text="1000175" class="fieldValue"/>
+                                                </HBox>
+                                                <HBox justifyContent="SpaceBetween" class="fieldRow">
+                                                    <Label text="货币：" class="fieldLabel" width="140px"/>
+                                                    <Text text="CNY" class="fieldValue"/>
+                                                </HBox>
+                                            </VBox>
+                                            
+                                            <!-- Right Column -->
+                                            <VBox class="sapUiMediumMarginBegin">
+                                                <HBox justifyContent="SpaceBetween" class="fieldRow sapUiSmallMarginBottom">
+                                                    <Label text="物料：" class="fieldLabel" width="140px"/>
+                                                    <Text text="{material}" class="fieldValue"/>
+                                                </HBox>
+                                                <HBox justifyContent="SpaceBetween" class="fieldRow">
+                                                    <Label text="短文本：" class="fieldLabel" width="140px"/>
+                                                    <Text text="{shortText}" class="fieldValue" wrapping="true" maxLines="2"/>
+                                                </HBox>
+                                            </VBox>
+
+                                              <HBox justifyContent="SpaceBetween" class="fieldRow fieldRowHighlight">
+                                            <Label text="总价值：" class="fieldLabel fieldLabelBold"/>
+                                            <ObjectNumber
+                                                number="{
+                                                    path: 'totalValue',
+                                                    type: 'sap.ui.model.type.Float',
+                                                    formatOptions: {
+                                                        maxFractionDigits: 2,
+                                                        minFractionDigits: 2
+                                                    }
+                                                }"
+                                                unit="{currency/code}"
+                                                emphasized="true"
+                                                class="fieldValue fieldValueBold"/>
+                                        </HBox>
+                                        </layout:Grid>
+                                    </VBox>
+                                </VBox>
+                                
+                                <!-- Quantity & Price Card -->
+                                <VBox class="overviewCard">
+                                    <layoutData>
+                                        <layout:GridData span="XL4 L4 M12 S12"/>
+                                    </layoutData>
+                                    <Title text="组织信息   " level="H5" class="cardTitle"/>
+                                    <VBox class="sapUiTinyMarginTop">
+                                        <HBox justifyContent="SpaceBetween" class="fieldRow">
+                                            <Label text="采购组：" class="fieldLabel"/>
+                                            <Text text="101" class="fieldValue"/>
+                                        </HBox>
+                                        <HBox justifyContent="SpaceBetween" class="fieldRow">
+                                            <Label text="采购组织：" class="fieldLabel"/>
+                                            <Text text="泰和新材料总部工厂" class="fieldValue"/>
+                                        </HBox>
+                                        <HBox justifyContent="SpaceBetween" class="fieldRow">
+                                            <Label text="公司代码：" class="fieldLabel"/>
+                                            <Text text="1010" class="fieldValue"/>
+                                        </HBox>
+                                        <!-- <HBox justifyContent="SpaceBetween" class="fieldRow">
+                                            <Label text="Currency:" class="fieldLabel"/>
+                                            <Text text="{currency/name}" class="fieldValue"/>
+                                        </HBox> -->
+                                      
+                                    </VBox>
+                                </VBox>
+                            </layout:Grid>
+
+                            <!-- Purchase Request Details Table -->
+                            <VBox class="sapUiSmallMarginTop">
+                                <!-- <Title text="采购请求详情" level="H4" class="sectionTitle"/> -->
+                                <Table
+                                    id="purchaseRequestDetailsTable"
+                                    noDataText="无数据"
+                                    class="sapUiSmallMarginTop">
+                                    
+                                    <columns>
+                                        <Column width="8%" hAlign="Center">
+                                            <Text text="{i18n>prNumber}"/>
+                                        </Column>
+                                        <Column width="8%" hAlign="Center">
+                                            <Text text="{i18n>purchaseOrder}"/>
+                                        </Column>
+                                        <Column width="7%" hAlign="Center">
+                                            <Text text="{i18n>material}"/>
+                                        </Column>
+                                        <Column width="12%" hAlign="Center">
+                                            <Text text="{i18n>description}"/>
+                                        </Column>
+                                        <Column width="8%" hAlign="Center">
+                                            <Text text="{i18n>quantity}"/>
+                                        </Column>
+                                        <Column width="8%" hAlign="Center">
+                                            <Text text="{i18n>status}"/>
+                                        </Column>
+                                        <Column width="9%" hAlign="Center">
+                                            <Text text="{i18n>purchaseOrder}"/>
+                                        </Column>
+                                        <Column width="5%" hAlign="Center">
+                                            <Text text="{i18n>project}"/>
+                                        </Column>
+                                        <Column width="10%" hAlign="Center">
+                                            <Text text="{i18n>totalValue}"/>
+                                        </Column>
+                                        <Column width="9%" hAlign="Center">
+                                            <Text text="{i18n>supplier}"/>
+                                        </Column>
+                                        <Column width="8%" hAlign="Center">
+                                            <Text text="{i18n>frameworkAgreement}"/>
+                                        </Column>
+                                        <Column hAlign="Center">
+                                            <Text text="{i18n>deliveryAddress}"/>
+                                        </Column>
+                                    </columns>
+                                    
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <HBox justifyContent="Center" alignItems="Center">
+                                                    <core:Icon
+                                                        src="sap-icon://flag"
+                                                        color="{
+                                                            path: 'priority/criticality',
+                                                            formatter: '.formatter.formatPriorityColor'
+                                                        }"
+                                                        class="sapUiTinyMarginEnd"/>
+                                                    <Text text="{identifier}" textAlign="Center"/>
+                                                </HBox>
+                                                <Text text="{purchaseOrder}" textAlign="Center"/>
+                                                <Text text="{material}" textAlign="Center"/>
+                                                <Text text="{shortText}" wrapping="false" textAlign="Center"/>
+                                                <HBox justifyContent="Center" alignItems="Center">
+                                                    <ObjectNumber
+                                                        number="{purchaseQuantity}"
+                                                        unit="{orderUnit/code}"/>
+                                                </HBox>
+                                                <HBox justifyContent="Center" alignItems="Center">
+                                                    <ObjectStatus
+                                                        text="{requestStatus/name}"
+                                                        state="Information"/>
+                                                </HBox>
+                                                <Text text="{purchaseOrder}" textAlign="Center"/>
+                                                <Text text="{project}" textAlign="Center"/>
+                                                <HBox justifyContent="Center" alignItems="Center">
+                                                    <ObjectNumber
+                                                        number="{
+                                                            path: 'totalValue',
+                                                            type: 'sap.ui.model.type.Float',
+                                                            formatOptions: {
+                                                                maxFractionDigits: 2,
+                                                                minFractionDigits: 2
+                                                            }
+                                                        }"
+                                                        unit="{currency/code}"
+                                                        emphasized="true"/>
+                                                </HBox>
+                                                <Text text="{supplier/name}" textAlign="Center"/>
+                                                <Text text="{frameworkAgreement}" wrapping="false" textAlign="Center"/>
+                                                <Text text="{deliveryAddress}" wrapping="false" textAlign="Center"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </VBox>
+
+                        <!-- Purchase Process Flow Section -->
+                        <!-- Purchase Process Flow (compact) -->
+                        <!-- <VBox class="compactSection">
+                            <Title text="{i18n>purchaseProcessFlow}" level="H3" class="sectionTitle"/>
+                            <Table
+                                id="processFlowTable"
+                                items="{
+                                    path: 'purchaseFlow',
+                                    parameters: {
+                                        $expand: 'purchaseRequest'
+                                    }
+                                }"
+                                noDataText="{i18n>noProcessFlowData}">
+                                
+                                <columns>
+                                    <Column>
+                                        <Text text="{i18n>flowStatus}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>processStep}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>startDate}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>endDate}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>contactPerson}"/>
+                                    </Column>
+                                </columns>
+                                
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <ObjectStatus
+                                                text="{stepStatus}"
+                                                state="{
+                                                    path: 'criticality',
+                                                    formatter: '.formatter.formatCriticalityState'
+                                                }"/>
+                                            <Text text="{processStep}"/>
+                                            <Text text="{path: 'stepStartDate', formatter: '.formatter.formatDate'}"/>
+                                            <Text text="{path: 'stepEndDate', formatter: '.formatter.formatDate'}"/>
+                                            <Text text="{purchaseRequest/contactPerson/fullName}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox> -->
+                    </VBox>
+                </f:content>
+            </f:DynamicPage>
+        </content>
+    </Page>
+
+</mvc:View>

@@ -13,79 +13,77 @@ const FieldControl = {
   
 module.exports = cds.service.impl(async function (srv) {
     const {
-        Incidents,
-        BusinessPartner,
+        PurchaseRequests,
         Individual,
-        BusinessPartnerAddress
+        Supplier
     } = srv.entities
 
-    //read/edit event hook after read  of entity 'Incidents'
-    srv.after(["READ", "EDIT"], "Incidents", setTechnicalFlags);
-    srv.after("READ", "Incidents", setPriorityCriticality);
-    srv.before("SAVE", "Incidents", validateincident);
+    //read/edit event hook after read  of entity 'PurchaseRequests'
+    srv.after(["READ", "EDIT"], "PurchaseRequests", setTechnicalFlags);
+    srv.after("READ", "PurchaseRequests", setPriorityCriticality);
+    srv.before("SAVE", "PurchaseRequests", validatePurchaseRequest);
 
     /**
-     * Set technical flags, used
-     for controlling UI behaviour, on the 'Incidents'
-     entity
+     * Set technical flags, used for controlling UI behaviour, on the 'PurchaseRequests' entity
      *
-     * @param Incidents {
-         Incidents | Incidents[]
-     }(Array of ) Incidents
+     * @param PurchaseRequests { PurchaseRequests | PurchaseRequests[] } (Array of) PurchaseRequests
      */
-    function setTechnicalFlags(Incidents) {
+    function setTechnicalFlags(PurchaseRequests) {
 
-        function _setFlags(incident) {
-            incident.isDraft = !incident.IsActiveEntity;
+        function _setFlags(purchaseRequest) {
+            purchaseRequest.isDraft = !purchaseRequest.IsActiveEntity;
             // field control on the 'identifier' property
-            if (incident.IsActiveEntity) {
-                incident.identifierFieldControl = FieldControl.Optional;
-            } else if (incident.HasActiveEntity) {
-                incident.identifierFieldControl = FieldControl.ReadOnly;
+            if (purchaseRequest.IsActiveEntity) {
+                purchaseRequest.identifierFieldControl = FieldControl.Optional;
+            } else if (purchaseRequest.HasActiveEntity) {
+                purchaseRequest.identifierFieldControl = FieldControl.ReadOnly;
             } else {
-                incident.identifierFieldControl = FieldControl.Mandatory;
+                purchaseRequest.identifierFieldControl = FieldControl.Mandatory;
             }
         }
 
-        if (Array.isArray(Incidents)) {
-            Incidents.forEach(_setFlags);
+        if (Array.isArray(PurchaseRequests)) {
+            PurchaseRequests.forEach(_setFlags);
         } else {
-            _setFlags(Incidents);
+            _setFlags(PurchaseRequests);
         }
     };
 
     /**
      * Set priority criticality used for display in LR table
      *
-     * @param Incidents {
-         Incidents | Incidents[]
-     }(Array of ) Incidents
+     * @param PurchaseRequests { PurchaseRequests | PurchaseRequests[] } (Array of) PurchaseRequests
      */
-    function setPriorityCriticality(Incidents) {
+    function setPriorityCriticality(PurchaseRequests) {
 
-        function _setCriticality(incident) {
-            if (incident.priority) {
-                incident.priority.criticality = parseInt(incident.priority.code);
+        function _setCriticality(purchaseRequest) {
+            if (purchaseRequest.priority) {
+                purchaseRequest.priority.criticality = parseInt(purchaseRequest.priority.code);
             }
         }
 
-        if (Array.isArray(Incidents)) {
-            Incidents.forEach(_setCriticality);
+        if (Array.isArray(PurchaseRequests)) {
+            PurchaseRequests.forEach(_setCriticality);
         } else {
-            _setCriticality(Incidents);
+            _setCriticality(PurchaseRequests);
         }
     }
 
     /**
-     * Validate a 'incident'
-     entry
+     * Validate a 'purchaseRequest' entry
      *
      * @param req   Request
      */
-    function validateincident(req) {
+    function validatePurchaseRequest(req) {
         // check mandatory properties
         if (!req.data.identifier) {
-            req.error(400, "Enter an Incident Identifier", "in/identifier");
+            req.error(400, "Enter a Purchase Request Identifier", "in/identifier");
+        }
+        if (!req.data.material) {
+            req.error(400, "Enter a Material Number", "in/material");
+        }
+        if (!req.data.purchaseQuantity || req.data.purchaseQuantity <= 0) {
+            req.error(400, "Enter a valid Purchase Quantity", "in/purchaseQuantity");
         }
     }
 })

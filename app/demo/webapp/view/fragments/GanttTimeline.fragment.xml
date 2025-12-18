@@ -1,0 +1,229 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:gantt="sap.gantt.simple"
+	xmlns:table="sap.ui.table"
+	xmlns:axistime="sap.gantt.axistime">
+	
+	<gantt:GanttChartContainer
+		id="ganttContainer"
+		width="100%"
+		height="400px"
+		core:require="{handler: 'demo/purchaserequest/util/GanttFormatter'}">
+
+		<!-- Toolbar with zoom controls and settings -->
+		<gantt:toolbar>
+			<gantt:ContainerToolbar 
+				stepCountOfSlider="8"
+				showSettingButton="true"
+				showLegendButton="true"/>
+		</gantt:toolbar>
+		
+		<gantt:GanttChartWithTable
+			id="ganttChart"
+			width="100%"
+			height="100%"
+			shapeSelectionMode="Multiple"
+			enableCursorLine="false"
+			enableNowLine="true"
+			enableVerticalLine="false"
+			enableAdhocLine="false">
+			
+			<!-- Table with process steps -->
+			<gantt:table>
+				<table:Table
+					id="treeTable"
+					rows="{
+						path: 'purchaseProcessTimeline',
+						parameters: {
+							$expand: 'purchaseRequest($expand=contactPerson)'
+						},
+						sorter: {
+							path: 'startTime',
+							descending: false
+						}
+					}"
+					selectionMode="None"
+					enableCellFilter="false"
+					columnHeaderHeight="56"
+					alternateRowColors="true"
+					threshold="100">
+					
+					<table:columns>
+						<!-- Responsible Person -->
+						<table:Column width="auto" minWidth="120">
+							<Label text="负责人" design="Bold"/>
+							<table:template>
+								<HBox alignItems="Center">
+									<core:Icon
+										src="sap-icon://customer"
+										color="#0070F2"
+										class="sapUiTinyMarginEnd"/>
+									<Link 
+										text="{purchaseRequest/contactPerson/fullName}" 
+										press="onContactPersonPress"
+										wrapping="false"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						
+						<!-- Process Step -->
+						<table:Column width="auto" minWidth="140">
+							<Label text="步骤" design="Bold"/>
+							<table:template>
+								<VBox>
+									<Text text="{text}" wrapping="false"/>
+								</VBox>
+							</table:template>
+						</table:Column>
+						
+						<!-- Start Date -->
+						<table:Column width="auto" sortProperty="startTime" minWidth="110">
+							<Label text="开始日期" design="Bold"/>
+							<table:template>
+								<VBox>
+									<Text text="{
+										path: 'startTime',
+										formatter: 'handler.formatDate'
+									}"/>
+								</VBox>
+							</table:template>
+						</table:Column>
+						
+						<!-- End Date -->
+						<table:Column width="auto" sortProperty="endTime" minWidth="110">
+							<Label text="结束日期" design="Bold"/>
+							<table:template>
+								<VBox>
+									<Text text="{
+										path: 'endTime',
+										formatter: 'handler.formatDate'
+									}"/>
+								</VBox>
+							</table:template>
+						</table:Column>
+						
+						<!-- Duration -->
+						<table:Column width="auto" minWidth="90">
+							<Label text="时间" design="Bold"/>
+							<table:template>
+								<VBox>
+									<ObjectNumber
+										number="{
+											parts: ['startTime', 'endTime'],
+											formatter: 'handler.calculateDuration'
+										}"
+										unit="天"
+										state="{
+											parts: ['startTime', 'endTime'],
+											formatter: 'handler.getDurationState'
+										}"/>
+								</VBox>
+							</table:template>
+						</table:Column>
+					</table:columns>
+					
+					<!-- Gantt Row Settings with shapes -->
+					<table:rowSettingsTemplate>
+						<gantt:GanttRowSettings
+							rowId="{id}"
+							highlight="{
+                                parts: ['startTime', 'endTime'],
+                                formatter: 'handler.getDurationState'
+                            }">
+							
+							<!-- Background layer: Gray background for delayed tasks -->
+							<gantt:shapes1>
+								<!-- Background for 15-30 day tasks (gray for 0-15 days) -->
+								<gantt:BaseRectangle
+									visible="{= ${type} === 'task' }"
+									shapeId="{id}_bg_15"
+									time="{path: 'startTime', formatter: 'handler.fnTimeConverter'}"
+									endTime="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.getBackgroundEndTime'
+									}"
+									fill="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.getBackgroundColor'
+									}"
+									strokeWidth="0"
+									height="48"
+									rx="0"
+									ry="0"
+									selectable="false"
+									hoverable="false"/>
+							</gantt:shapes1>
+							
+							<!-- Main task layer -->
+							<gantt:shapes2>
+								<!-- Task: Rectangle without rounded corners -->
+								<gantt:BaseRectangle
+									visible="{= ${type} === 'task' }"
+									shapeId="{id}"
+									time="{path: 'startTime', formatter: 'handler.fnTimeConverter'}"
+									endTime="{path: 'endTime', formatter: 'handler.fnTimeConverter'}"
+									fill="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.getTaskColor'
+									}"
+									strokeWidth="0"
+									height="32"
+									rx="0"
+									ry="0"
+									selectable="true"
+									hoverable="true"
+									showTitle="false"/>
+							</gantt:shapes2>
+							
+							<!-- Time comparison layer: Show 15-day and 30-day reference lines -->
+							<gantt:shapes3>
+								<!-- 15-day reference marker for tasks > 15 days -->
+								<gantt:BaseRectangle
+									visible="{= ${type} === 'task' }"
+									shapeId="{id}_marker_15"
+									time="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.get15DayMarkerStart'
+									}"
+									endTime="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.get15DayMarkerEnd'
+									}"
+									fill="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.get15DayMarkerColor'
+									}"
+									strokeWidth="0"
+									height="2"
+									selectable="false"
+									hoverable="false"/>
+								
+								<!-- 30-day reference marker for tasks > 30 days -->
+								<gantt:BaseRectangle
+									visible="{= ${type} === 'task' }"
+									shapeId="{id}_marker_30"
+									time="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.get30DayMarkerStart'
+									}"
+									endTime="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.get30DayMarkerEnd'
+									}"
+									fill="{
+										parts: ['startTime', 'endTime'],
+										formatter: 'handler.get30DayMarkerColor'
+									}"
+									strokeWidth="0"
+									height="2"
+									selectable="false"
+									hoverable="false"/>
+							</gantt:shapes3>
+						</gantt:GanttRowSettings>
+					</table:rowSettingsTemplate>
+				</table:Table>
+			</gantt:table>
+		</gantt:GanttChartWithTable>
+	</gantt:GanttChartContainer>
+</core:FragmentDefinition>

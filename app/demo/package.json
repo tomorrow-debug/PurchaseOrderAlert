@@ -1,0 +1,34 @@
+{
+  "name": "demo-purchase-request-basic",
+  "version": "1.0.0",
+  "description": "Purchase Request Management using Basic UI5 Template",
+  "scripts": {
+    "start": "ui5 serve --port 8081 --open index.html",
+    "build": "ui5 build --config ui5.yaml --clean-dest --dest dist",
+    "build-local": "ui5 build preload --clean-dest"
+  },
+  "keywords": [
+    "ui5",
+    "sapui5",
+    "basic-template",
+    "purchase-request"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@sap/ux-ui5-tooling": "^1.19.3",
+    "@ui5/cli": "^3.0.0",
+    "ui5-task-zipper": "^3"
+  },
+  "sapux": true,
+  "sapuxLayer": "CUSTOMER_BASE",
+  "dependencies": {
+    "purchase_order_alert": "file:../.."
+  },
+  "main": "webapp/index.html",
+  "ui5": {
+    "dependencies": [
+      "ui5-task-zipper"
+    ]
+  }
+}

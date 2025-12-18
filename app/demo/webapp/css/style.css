@@ -1,0 +1,3147 @@
+/* ========================================
+   Modern Purchase Request Management Styles
+   ======================================== */
+
+/* === Global Full Width Settings === */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden;
+}
+
+/* Override FLP Sandbox width restrictions - only for main containers */
+#content {
+    max-width: none !important;
+    width: 100% !important;
+}
+
+.sapMShell,
+.sapMApp {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+.sapMPage:not(.modernListPage) {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+.sapMPage.modernListPage {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Override SAP UI5 default content padding and width restrictions */
+.sapUiBody,
+.sapMShellGlobalInnerContainer {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Override Unified Shell (FLP) container width restrictions */
+.sapUShellApplicationContainer,
+.sapUShellApplicationContainer > div,
+#application-container,
+#application-container > div,
+#viewPortContainer,
+.sapUShellFullWidth {
+    max-width: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+.sapMShellCentralBox {
+    padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.sapMShellCentralBox > *:not(.modernListPage) {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* === Full Width Layout === */
+.fullWidthPage {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.fullWidthPage .sapMPageContent {
+    padding: 1.5rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    background: #F5F7FA !important;
+}
+
+/* More specific selector to override SAP defaults */
+.sapMPage.fullWidthPage .sapMPageContent,
+#listPage .sapMPageContent,
+div[id*="listPage"] .sapMPageContent {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure ScrollEnablement doesn't override our padding */
+.fullWidthPage .sapMPageContent .sapMPageEnableScrolling,
+.fullWidthPage .sapMScrollContScroll {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.fullWidthPage .sapMPageContent > * {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Ultra-high priority override for List page content padding */
+html body div.sapMShell div.sapMShellCentralBox section.sapMPage.modernListPage.fullWidthPage div.sapMPageContent {
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    background: #F5F7FA !important;
+}
+
+/* Page Content Wrapper with padding */
+.pageContentWrapper {
+    padding: 1.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: #F5F7FA !important;
+}
+
+/* === Page Background === */
+.appBackground {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+    min-height: 100vh;
+}
+
+.modernListPage {
+    background: #F5F7FA !important;
+}
+
+.modernListPage .sapMPageHeader {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-radius: 0 0 12px 12px !important;
+    margin: 0rem 1.5rem 1.5rem 1.5rem !important;
+    margin-bottom: 0 !important;
+    width: calc(100% - 4rem) !important;
+    max-width: calc(100% - 4rem) !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+}
+
+/* Force Bar to fill entire header width */
+.modernListPage .sapMPageHeader .sapMBar,
+.modernListPage .sapMPageHeader .sapMBar-CTX,
+.modernListPage .sapMPageHeader .sapMHeader-CTX {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 1.5rem !important;
+    box-sizing: border-box !important;
+}
+
+.modernListPage .sapMPageHeader .sapMTitle {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    font-size: 1.75rem !important;
+    letter-spacing: -0.5px;
+    margin: 0 !important;
+}
+
+
+/* Target the UI5-generated header right container by exact id and add right spacing */
+div[id="container-demo.purchaserequest---List--listPage-intHeader-BarRight"] {
+    margin-right: 6% !important; 
+    padding-right: 0 !important;
+}
+
+/* === Toolbar Enhancements === */
+.modernToolbar {
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 0.875rem 1.5rem !important;
+    border-bottom: 2px solid rgba(30, 136, 229, 0.15) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.modernSearchField {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* === KPI Cards Section === */
+.kpiSection {
+    padding: 1.5rem 0;
+    gap: 1rem;
+}
+
+.kpiCard {
+    border-radius: 16px !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    background: #ffffff !important;
+    border: none !important;
+    position: relative;
+    height: 100%;
+    min-height: 180px;
+    margin: 0;
+}
+
+.kpiCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, rgba(0,112,242,0.8) 0%, rgba(0,112,242,0.4) 100%);
+    transition: height 0.3s ease;
+}
+
+.kpiCard:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15) !important;
+}
+
+.kpiCard:hover::before {
+    height: 8px;
+}
+
+/* 移除 header 样式，因为不再使用 */
+.kpiCard .sapFCardHeader {
+    display: none !important;
+}
+
+/* KPI 卡片横向布局内容 */
+.kpiCardContent {
+    padding: 1rem 2rem !important;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.kpiIcon {
+    font-size: 5rem !important;
+    opacity: 0.85;
+    flex-shrink: 0;
+}
+
+.kpiData {
+    flex: 1;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.kpiNumber {
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+/* UI5 ObjectNumber renders text in .sapMObjectNumberText; increase specificity so our KPI styles apply */
+.kpiNumber .sapMObjectNumberText,
+.sapMObjectNumber.kpiNumber .sapMObjectNumberText {
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+/* Also ensure unit text is not oversized */
+.kpiNumber .sapMObjectNumberUnit,
+.sapMObjectNumber.kpiNumber .sapMObjectNumberUnit {
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    opacity: 0.9 !important;
+}
+
+.kpiTitle {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: #6c757d !important;
+    margin-top: 0.5rem !important;
+}
+
+.kpiLabel {
+    color: #6c757d !important;
+    font-size: 0.85rem !important;
+    font-weight: 400 !important;
+    margin-top: 0.25rem !important;
+}
+
+/* KPI Card Specific Colors with Gradients */
+.totalCard::before {
+    background: linear-gradient(90deg, #1e88e5 0%, #42a5f5 100%) !important;
+}
+
+.totalCard .kpiNumber {
+    color: #1e88e5 !important;
+}
+
+.totalCard .kpiIcon {
+    color: #1e88e5 !important;
+}
+
+.highPriorityCard::before {
+    background: linear-gradient(90deg, #dc3545 0%, #e74c3c 100%) !important;
+}
+
+.highPriorityCard .kpiNumber {
+    color: #dc3545 !important;
+}
+
+.highPriorityCard .kpiIcon {
+    color: #dc3545 !important;
+}
+
+.mediumPriorityCard::before {
+    background: linear-gradient(90deg, #fd7e14 0%, #ff9800 100%) !important;
+}
+
+.mediumPriorityCard .kpiNumber {
+    color: #fd7e14 !important;
+}
+
+.mediumPriorityCard .kpiIcon {
+    color: #fd7e14 !important;
+}
+
+.valueCard::before {
+    background: linear-gradient(90deg, #28a745 0%, #5cb85c 100%) !important;
+}
+
+.valueCard .kpiNumber {
+    color: #28a745 !important;
+}
+
+.valueCard .kpiIcon {
+    color: #28a745 !important;
+}
+
+.lowPriorityCard::before {
+    background: linear-gradient(90deg, #28a745 0%, #5cb85c 100%) !important;
+}
+
+.lowPriorityCard .kpiNumber {
+    color: #28a745 !important;
+}
+
+.lowPriorityCard .kpiIcon {
+    color: #28a745 !important;
+}
+
+/* === Filter Panel === */
+.filterPanel {
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+    border: none !important;
+}
+
+.filterPanel .sapMPanelHdr {
+    background: linear-gradient(to right, #f8f9fa, #ffffff) !important;
+    border-radius: 8px 8px 0 0 !important;
+    font-weight: 600 !important;
+}
+
+/* Top Filter Panel Enhancements */
+.topFilterPanel {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid rgba(30, 136, 229, 0.15) !important;
+    border-radius: 12px !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.topFilterPanel .sapMPanelHdr {
+    background: linear-gradient(90deg, #1e88e5 0%, #1565c0 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 12px 12px 0 0 !important;
+    letter-spacing: 0.5px;
+}
+
+.topFilterPanel .sapMPanelHdr .sapMPanelHdrText {
+    color: #ffffff !important;
+}
+
+/* Compact Filter Bar - No Header */
+.compactFilterBar {
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    margin: 0 0 1.5rem 0 !important;
+    transition: box-shadow 0.3s ease !important;
+}
+
+.compactFilterBar:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.filterGrid {
+    padding: 0 !important;
+    gap: 1rem;
+}
+
+.filterBox {
+    padding: 0.5rem;
+}
+
+.filterButtonsRow {
+    width: 100%;
+    gap: 0.5rem;
+}
+
+/* Center collapse button inside filter bar */
+.compactFilterBar { position: relative; }
+.dashboardCollapseCenterBtn {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    bottom: -14px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 !important;
+    border: 1px solid #D0DAE5 !important;
+    border-radius: 50% !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    z-index: 5 !important;
+}
+.dashboardCollapseCenterBtn .sapMBtnInner { padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+.dashboardCollapseCenterBtn:hover { transform: translateX(-50%) scale(1.08) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important; }
+.dashboardCollapseCenterBtn:active { transform: translateX(-50%) scale(0.96) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.10) !important; }
+.dashboardCollapseCenterBtn:focus-visible { outline: none !important; box-shadow: 0 0 0 2px rgba(0,112,242,0.35) !important; }
+
+
+
+
+.clearFilterBtn {
+    width: 5rem !important;
+    height: 2.5rem !important;
+    min-height: 2.5rem !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-weight: 600 !important;
+    margin: 0.5rem 0 0.5rem 0 !important;
+    /* margin-top: 1rem !important; */
+    font-size: 1rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.clearFilterBtn .sapMBtnInner {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
+.clearFilterBtn:hover {
+    /* background: linear-gradient(135deg, #e74c3c 0%, #bd2130 100%) !important; */
+    transform: translateY(-2px);
+    /* intentionally remove box-shadow to avoid a visible border-like effect */
+    box-shadow: none !important;
+}
+
+/* Remove focus/active outlines specifically for the Clear All button to avoid the blue outline on keyboard focus */
+.clearFilterBtn:focus,
+.clearFilterBtn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Button Container for Clear and AI buttons */
+.buttonContainer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    height: 2.5rem !important;
+    min-height: 2.5rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.dashboardToggleBtn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.25rem !important;
+    transition: transform 0.2s ease !important;
+    min-width: auto !important;
+}
+
+.dashboardToggleBtn:hover {
+    transform: scale(1.1) !important;
+}
+
+/* === Dashboard Layout: Cards + Chart === */
+.dashboardContainer {
+    display: flex !important;
+    gap: 1rem;
+    margin: 0 0 1.5rem 0 !important;
+    padding: 1rem 1rem 0 1rem !important;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+    background: #FFFFFF !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    transition: box-shadow 0.3s ease !important;
+}
+
+.dashboardContainer:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.kpiCardsSection {
+    flex: 1 1 50%;
+    min-width: 0;
+    display: flex;
+    align-items: stretch;
+    padding: 0.5rem 0.5rem 0.5rem 0rem !important;
+}
+
+.kpiCardsGrid {
+    width: 100%;
+    flex: 1;
+}
+
+.kpiCardsGrid .sapUiLayoutCSSGridItem {
+    padding: 0.5rem !important;
+}
+
+.chartSection {
+    flex: 1 1 50%;
+    min-width: 0;
+    display: flex;
+    align-items: stretch;
+    padding: 0.5rem 0.5rem 0 0.5rem!important;
+    margin: 0 !important;
+}
+
+/* Make chart area visually rounded like KPI cards */
+.chartCard,
+.chartContainer {
+    border-radius: 16px !important;
+    overflow: hidden !important; /* clip inner chart to rounded corners */
+}
+
+/* If VizFrame or inner SVG has background, ensure it doesn't draw outside */
+.chartContainer .vizFrame,
+.chartContainer svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ensure inner VizFrame and rendered SVG/Canvas obey parent rounded corners */
+.chartContainer {
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    box-sizing: border-box;
+}
+
+.chartContainer .sapVizFrame,
+.chartContainer .sapVizFrame svg,
+.chartContainer .sapVizFrame canvas,
+.chartContainer .sapVizFrame .v-Canvas,
+.chartContainer .vizFrame,
+.chartContainer svg,
+.chartContainer canvas {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+.chartCard {
+    flex: 1;
+    border-radius: 16px !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible !important;
+    background: #ffffff !important;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    min-height: 380px;
+}
+
+/* Add glassmorphism effect similar to KPI cards */
+.chartCard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+    transition: height 0.3s ease;
+    border-radius: 16px 16px 0 0;
+    z-index: 1;
+}
+
+.chartCard:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15) !important;
+}
+
+.chartCard:hover::before {
+    height: 8px;
+}
+
+.chartCard .sapFCardHeader {
+    display: none !important;
+}
+
+.chartCard .sapFCardContent {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chartContainer {
+    flex: 1;
+    display: flex !important;
+    align-items: stretch;
+    justify-content: stretch;
+    width: 100% !important;
+    height: 100% !important;
+    /* min-height: 340px !important; */
+    padding: 1.5rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.chartContainer > * {
+    width: 100% !important;
+    height: 100% !important;
+    /* min-height: 340px !important; */
+}
+
+/* VizFrame specific styles */
+.chartContainer .sapVizFrame {
+    width: 100% !important;
+    height: 100% !important;
+    /* min-height: 340px !important; */
+}
+
+.chartContainer #priorityChart {
+    width: 100% !important;
+    height: 100% !important;
+    /* min-height: 340px !important; */
+    display: block !important;
+}
+
+/* VizFrame chart axis labels - match KPI card font size */
+#priorityChart .v-m-xAxis text,
+#priorityChart .v-m-yAxis text,
+#priorityChart .v-m-categoryAxis text,
+#priorityChart .v-m-valueAxis text,
+.sapVizFrame .v-m-xAxis text,
+.sapVizFrame .v-m-yAxis text,
+.sapVizFrame .v-m-categoryAxis text,
+.sapVizFrame .v-m-valueAxis text {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    fill: #2c3e50 !important;
+}
+
+/* Chart axis titles */
+#priorityChart .v-m-axisTitle text,
+.sapVizFrame .v-m-axisTitle text {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    fill: #2c3e50 !important;
+}
+
+/* Chart title */
+#priorityChart .v-m-title text,
+.sapVizFrame .v-m-title text {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    fill: #2c3e50 !important;
+}
+
+/* Data labels on bars */
+#priorityChart .v-datalabel text,
+.sapVizFrame .v-datalabel text {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+}
+
+.chartPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chartDataViz {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === Bar Chart Styles === */
+.barChartContainer {
+    width: 100%;
+    height: 100%;
+    max-height: 350px;
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.barWrapper {
+    flex: 1;
+    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bar {
+    width: 70px;
+    min-height: 40px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.bar:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bar-high {
+    background: linear-gradient(180deg, #dc3545 0%, #c82333 100%);
+    height: 65%;
+}
+
+.bar-medium {
+    background: linear-gradient(180deg, #fd7e14 0%, #e8590c 100%);
+    height: 40%;
+}
+
+.bar-low {
+    background: linear-gradient(180deg, #28a745 0%, #218838 100%);
+    height: 20%;
+}
+
+.bar-total {
+    background: linear-gradient(180deg, #1e88e5 0%, #1565c0 100%);
+    height: 75%;
+}
+
+.barValue {
+    color: #ffffff !important;
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.barLabel {
+    color: #495057 !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    text-align: center;
+    margin-top: 0.75rem;
+}
+
+.kpiCardsContainer {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.kpiCardsContainer .sapUiLayoutCSSGrid {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.kpiCardsContainer .sapUiLayoutCSSGridItem {
+    padding: 0 0.5rem !important;
+}
+
+.filterLabel {
+    font-weight: 600 !important;
+    color: #32363a !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* === Modern Table === */
+.modernTable {
+    background: #FFFFFF !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    overflow: hidden;
+    border: 2px solid #E8EBED !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    transition: box-shadow 0.3s ease !important;
+}
+
+.modernTable:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.modernTable .sapMListTbl {
+    border: none !important;
+    /* allow header and columns to adapt to available width instead of strict fixed layout */
+    table-layout: auto !important;
+    width: 100% !important;
+    border-collapse: collapse !important; /* enable visible cell borders cleanly */
+}
+
+/* Subtle borders between cells for clarity */
+.modernTable .sapMListTblHeaderCell,
+.modernTable .sapMListTblCell {
+    border-right: 1px solid #E8EBED !important;
+}
+.modernTable .sapMListTblHeaderCell:last-child,
+.modernTable .sapMListTblCell:last-child {
+    border-right: none !important;
+}
+.modernTable .sapMListTbl thead {
+    border-bottom: 2px solid rgba(0,0,0,0.06) !important;
+}
+
+/* Remove any extra left/right gutter on the header row so it fills container edges */
+.modernTable .sapMListTblHeader {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display: table-header-group !important;
+}
+
+/* Ensure the table element itself uses full width inside the modernTable container */
+.modernTable table {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.modernTable .sapMListTblHeaderCell {
+    background: #F5F7FA !important;
+    font-weight: 600 !important;
+    color: #32363A !important;
+    border-bottom: 2px solid #E8EBED !important;
+    padding: 1rem 1rem !important;
+    font-size: 0.875rem !important;
+    letter-spacing: 0;
+    text-transform: none;
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+    height: 3rem !important;
+}
+
+.modernTable .sapMListTblHeaderCell .sapMText {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #32363A !important;
+    display: block !important;
+    width: 100% !important;
+    line-height: 1.5 !important;
+}
+
+.modernTable .sapMLIB {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.modernTable .sapMLIB::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: linear-gradient(90deg, #1e88e5 0%, transparent 100%);
+    transition: width 0.3s ease;
+}
+
+.modernTable .sapMLIB:hover {
+    background: linear-gradient(90deg, rgba(30, 136, 229, 0.08) 0%, rgba(30, 136, 229, 0.02) 100%) !important;
+    cursor: pointer;
+    transform: translateX(4px);
+}
+
+.modernTable .sapMLIB:hover::before {
+    width: 4px;
+}
+
+.modernTable .sapMLIB.sapMLIBSelected {
+    background: linear-gradient(90deg, rgba(30, 136, 229, 0.25) 0%, rgba(30, 136, 229, 0.12) 100%) !important;
+    border-left: 5px solid #1e88e5 !important;
+    box-shadow: inset 0 0 0 1px rgba(30, 136, 229, 0.2) !important;
+}
+
+.modernTable .sapMLIB.sapMLIBSelected:hover {
+    background: linear-gradient(90deg, rgba(30, 136, 229, 0.3) 0%, rgba(30, 136, 229, 0.15) 100%) !important;
+}
+
+.modernTable .sapMListTblRow {
+    transition: background-color 0.3s ease;
+    min-height: 3.5rem;
+}
+
+.modernTable .sapMListTblRow:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* === Premium Table Enhancements === */
+.premiumTable .sapMListTblHighlightCell {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+.premiumTable .sapMListTblHeaderCell.sapMListTblHighlightCol {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+/* Also hide in modern table */
+.modernTable .sapMListTblHighlightCell {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+/* sapMListItems  */
+.modernTable .sapMTableTHead .sapMListTblRow .sapMListTblHighlightCol {
+    /* display: none !important; */
+    width: 2px !important;
+    padding: 0 !important;
+}
+
+.modernTable .sapMTableTBody .sapMListTblRow .sapMListTblHighlightCell {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+.modernTable .sapMListTblHeaderCell.sapMListTblHighlightCol {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+/* Hide navigation column (row action column) */
+.modernTable .sapMListTblNavCol,
+.premiumTable .sapMListTblNavCol {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+.modernTable .sapMListTblCell.sapMListTblNavigated,
+.premiumTable .sapMListTblCell.sapMListTblNavigated {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+/* Hide navigated column (another navigation-related column) */
+.modernTable .sapMListTblNavigatedCol,
+.premiumTable .sapMListTblNavigatedCol {
+    display: none !important;
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+/* Adjust selection column width to be narrower */
+.modernTable .sapMListTblSelCol,
+.premiumTable .sapMListTblSelCol {
+    width: 2.5rem !important;
+    min-width: 2.5rem !important;
+    max-width: 2.5rem !important;
+    padding: 0 0.25rem !important;
+}
+
+.modernTable .sapMListTblSelCol .sapMCb,
+.premiumTable .sapMListTblSelCol .sapMCb {
+    margin: 0 auto !important;
+    transform: scale(0.9) !important;
+}
+
+/* Also target the header cell for selection column */
+.modernTable .sapMListTblHeaderCell.sapMListTblSelCol,
+.premiumTable .sapMListTblHeaderCell.sapMListTblSelCol {
+    width: 2.5rem !important;
+    min-width: 2.5rem !important;
+    max-width: 2.5rem !important;
+    padding: 0 0.25rem !important;
+}
+
+/* Increase height of table header toolbar */
+.modernTable .sapMListHdr,
+.modernTable .sapMTBHeader-CTX,
+.modernTable .sapMListHdrTBar,
+.premiumTable .sapMListHdr,
+.premiumTable .sapMTBHeader-CTX,
+.premiumTable .sapMListHdrTBar {
+    min-height: 4rem !important;
+    height: auto !important;
+}
+
+.modernTable .sapMListHdr .sapMOTB,
+.premiumTable .sapMListHdr .sapMOTB {
+    padding: 0.75rem 1.5rem !important;
+}
+
+.modernTable .sapMListHdr .sapMTitle,
+.premiumTable .sapMListHdr .sapMTitle {
+    line-height: 2.5rem !important;
+}
+
+.premiumTable .sapMListTblHeaderCell {
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 3px solid #1e88e5 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    width: auto !important;
+}
+
+.premiumTable .sapMListTblHeaderCell .sapMText {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* Force table header cells to fill their containers */
+.premiumTable thead tr {
+    width: 100% !important;
+    display: table !important;
+    table-layout: fixed !important;
+}
+
+.premiumTable thead tr th {
+    width: auto !important;
+    box-sizing: border-box !important;
+}
+
+.premiumTable .sapMListTblHeader {
+    width: 100% !important;
+}
+
+.premiumTable .sapMListTbl {
+    table-layout: fixed !important;
+    width: 100% !important;
+}
+
+.premiumTable .sapMListTbl thead {
+    width: 100% !important;
+}
+
+.premiumTable .sapMListTbl thead tr {
+    display: table-row !important;
+    width: 100% !important;
+}
+
+.premiumTable .sapMListTbl thead tr th {
+    display: table-cell !important;
+    box-sizing: border-box !important;
+}
+
+.tableHeaderText {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* === Cell Container === */
+.cellContainer {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+/* === Priority Row Classes === */
+/* Priority row styles - only active when colors-enabled class is present */
+.colors-enabled .priorityRowHigh,
+.colors-enabled .sapUiTableRow.priorityRowHigh {
+    border-left: 6px solid #dc3545 !important;
+    background: linear-gradient(90deg, rgba(220, 53, 69, 0.08) 0%, rgba(220, 53, 69, 0.02) 100%) !important;
+}
+
+.colors-enabled .priorityRowHigh:hover,
+.colors-enabled .sapUiTableRow.priorityRowHigh:hover {
+    background: linear-gradient(90deg, rgba(220, 53, 69, 0.12) 0%, rgba(220, 53, 69, 0.04) 100%) !important;
+}
+
+.colors-enabled .priorityRowMedium,
+.colors-enabled .sapUiTableRow.priorityRowMedium {
+    border-left: 6px solid #fd7e14 !important;
+    background: linear-gradient(90deg, rgba(253, 126, 20, 0.08) 0%, rgba(253, 126, 20, 0.02) 100%) !important;
+}
+
+.colors-enabled .priorityRowMedium:hover,
+.colors-enabled .sapUiTableRow.priorityRowMedium:hover {
+    background: linear-gradient(90deg, rgba(253, 126, 20, 0.12) 0%, rgba(253, 126, 20, 0.04) 100%) !important;
+}
+
+.colors-enabled .priorityRowLow,
+.colors-enabled .sapUiTableRow.priorityRowLow {
+    border-left: 6px solid #28a745 !important;
+    background: linear-gradient(90deg, rgba(40, 167, 69, 0.08) 0%, rgba(40, 167, 69, 0.02) 100%) !important;
+}
+
+.colors-enabled .priorityRowLow:hover,
+.colors-enabled .sapUiTableRow.priorityRowLow:hover {
+    background: linear-gradient(90deg, rgba(40, 167, 69, 0.12) 0%, rgba(40, 167, 69, 0.04) 100%) !important;
+}
+
+/* Stronger priority row overrides to avoid zebra stripe conflicts - only when colors-enabled */
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh {
+    background: linear-gradient(90deg, rgba(220,53,69,0.09) 0%, rgba(220,53,69,0.03) 100%) !important;
+    border-left: 6px solid #dc3545 !important;
+    color: #881111 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh .sapMText {
+    color: #881111 !important;
+    font-weight: 600 !important;
+}
+
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium {
+    background: linear-gradient(90deg, rgba(253,126,20,0.09) 0%, rgba(253,126,20,0.03) 100%) !important;
+    border-left: 6px solid #fd7e14 !important;
+    color: #8a4b00 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium .sapMText {
+    color: #8a4b00 !important;
+    font-weight: 600 !important;
+}
+
+.colors-enabled.modernTable .sapMLIB.priorityRowLow,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow {
+    background: linear-gradient(90deg, rgba(40,167,69,0.09) 0%, rgba(40,167,69,0.03) 100%) !important;
+    border-left: 6px solid #28a745 !important;
+    color: #155724 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowLow .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow .sapMText {
+    color: #155724 !important;
+    font-weight: 600 !important;
+}
+
+/* Ensure hover still applies but keeps priority accent - only when colors-enabled */
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh:hover,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh:hover {
+    background: linear-gradient(90deg, rgba(220,53,69,0.14) 0%, rgba(220,53,69,0.05) 100%) !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium:hover,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium:hover {
+    background: linear-gradient(90deg, rgba(253,126,20,0.14) 0%, rgba(253,126,20,0.05) 100%) !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowLow:hover,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow:hover {
+    background: linear-gradient(90deg, rgba(40,167,69,0.14) 0%, rgba(40,167,69,0.05) 100%) !important;
+}
+
+/* Color the PR Number (first column) based on row priority - only when colors-enabled */
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh .tableCellBold,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh .tableCellBold {
+    color: #dc3545 !important; /* red */
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium .tableCellBold,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium .tableCellBold {
+    color: #fd7e14 !important; /* orange */
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowLow .tableCellBold,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow .tableCellBold {
+    color: #28a745 !important; /* green */
+}
+
+/* Specific classes applied directly to PR number cell (via formatter) - only when colors-enabled */
+.colors-enabled .priorityCellHigh {
+    color: #dc3545 !important; /* red */
+    font-weight: 700 !important;
+}
+.colors-enabled .priorityCellMedium {
+    color: #fd7e14 !important; /* orange */
+    font-weight: 700 !important;
+}
+.colors-enabled .priorityCellLow {
+    color: #28a745 !important; /* green */
+    font-weight: 700 !important;
+}
+
+/* Highest-specificity rules for SAP rendered text elements that carry our priorityCell classes - only when colors-enabled */
+.colors-enabled.modernTable .sapMText.priorityCellHigh,
+.colors-enabled.modernTable .sapMListTblRow .sapMText.priorityCellHigh,
+.colors-enabled .sapMText.priorityCellHigh {
+    color: #dc3545 !important;
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMText.priorityCellMedium,
+.colors-enabled.modernTable .sapMListTblRow .sapMText.priorityCellMedium,
+.colors-enabled .sapMText.priorityCellMedium {
+    color: #fd7e14 !important;
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMText.priorityCellLow,
+.colors-enabled.modernTable .sapMListTblRow .sapMText.priorityCellLow,
+.colors-enabled .sapMText.priorityCellLow {
+    color: #28a745 !important;
+    font-weight: 700 !important;
+}
+
+/* === Priority Flag Icon === */
+.priorityFlag {
+    font-size: 1.25rem !important;
+    margin-right: 0.5rem !important;
+    transition: transform 0.3s ease;
+}
+
+.priorityFlag:hover {
+    transform: scale(1.2);
+}
+
+/* === Priority Indicator === */
+.priorityIndicator {
+    font-size: 1.5rem !important;
+    line-height: 1 !important;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.priorityIndicator .sapMObjStatusText {
+    font-size: 1.5rem !important;
+}
+
+.priorityIndicator:hover {
+    transform: scale(1.3) rotate(360deg);
+}
+
+/* === Status Colors === */
+.statusHigh {
+    color: #dc3545 !important;
+    font-weight: 700 !important;
+}
+
+.statusMedium {
+    color: #fd7e14 !important;
+    font-weight: 700 !important;
+}
+
+.statusLow {
+    color: #28a745 !important;
+    font-weight: 700 !important;
+}
+
+/* === Object Status Enhanced === */
+.sapMObjectStatus {
+    font-weight: 600 !important;
+    padding: 0.35rem 0.9rem !important;
+    border-radius: 20px !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.sapMObjectStatus .sapMObjStatusText {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+}
+
+.sapMObjectStatus:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* === Object Number Enhanced === */
+.sapMObjectNumber {
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+}
+
+.sapMObjectNumber .sapMObjectNumberText {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+}
+
+.sapMObjectNumberUnit {
+    font-weight: 500 !important;
+    opacity: 0.8;
+    font-size: 0.75rem !important;
+}
+
+/* === Buttons === */
+.sapMBtn {
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+.sapMBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.sapMBtnEmphasized {
+    background: linear-gradient(135deg, #0070f2 0%, #0053ba 100%) !important;
+    border: none !important;
+}
+
+.sapMBtnReject {
+    background: linear-gradient(135deg, #bb0000 0%, #8b0000 100%) !important;
+    border: none !important;
+}
+
+/* === Search Field === */
+.sapMSF {
+    border-radius: 28px !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08) !important;
+    border: 2px solid transparent !important;
+    transition: all 0.3s ease !important;
+    background: #ffffff !important;
+}
+
+.sapMSF:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+    border-color: rgba(30, 136, 229, 0.3) !important;
+}
+
+.sapMSF:focus-within {
+    box-shadow: 0 4px 20px rgba(30, 136, 229, 0.25) !important;
+    border-color: #1e88e5 !important;
+    transform: translateY(-1px);
+}
+
+.sapMSFF {
+    border-radius: 28px !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.sapMSFF input {
+    font-size: 0.95rem !important;
+}
+
+.sapMSF .sapMSFI {
+    color: #1e88e5 !important;
+}
+
+/* === Toolbar === */
+.sapMTB {
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 0.75rem 1.25rem !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* === Buttons === */
+.sapMBtn {
+    border-radius: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.sapMBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.sapMBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+.sapMBtnEmphasized {
+    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+}
+
+.sapMBtnEmphasized:hover {
+    background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
+}
+
+.sapMBtnReject {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+}
+
+.sapMBtnReject:hover {
+    background: linear-gradient(135deg, #e74c3c 0%, #bd2130 100%) !important;
+}
+
+.sapMBtnTransparent {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.sapMBtnTransparent:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+.formContainer {
+    padding: 1.5rem !important;
+    background: #ffffff !important;
+    border-radius: 8px !important;
+}
+
+/* === Panels === */
+.sapMPanel {
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+.sapMPanelHdr {
+    font-weight: 600 !important;
+}
+
+/* === Object Header === */
+.objectHeader {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+/* === Dynamic Page === */
+.sapFDynamicPage {
+    background: transparent !important;
+}
+
+.sapFDynamicPageHeader {
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* === Cards === */
+.sapFCard {
+    transition: all 0.3s ease;
+}
+
+.sapFCard:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* === Loading Indicators === */
+.sapUiBlockLayerTabbable {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(4px) !important;
+}
+
+/* === Scrollbar Styling === */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sapMPage {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* === Responsive Design === */
+@media (max-width: 1200px) {
+    .dashboardContainer {
+        flex-direction: column !important;
+    }
+    
+    .kpiCardsSection,
+    .chartSection {
+        flex: 1 1 100% !important;
+    }
+    
+    .kpiCardsGrid {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .kpiNumber {
+        font-size: 2rem !important;
+    }
+    
+    .kpiCard {
+        margin-bottom: 0.5rem;
+        min-height: 150px;
+    }
+    
+    .barChartContainer {
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+    }
+    
+    .bar {
+        width: 40px;
+    }
+    
+    .dashboardContainer {
+        padding: 0.5rem !important;
+    }
+    
+    .compactFilterBar {
+        padding: 1rem !important;
+    }
+}
+
+/* === Focus States === */
+.sapMBtn:focus,
+.sapMInput:focus,
+.sapMComboBox:focus {
+    outline: 2px solid #0070f2 !important;
+    outline-offset: 2px;
+}
+
+/* === Table Cell Padding === */
+
+.sapMListTblCell {
+    padding: 0.5rem 0.75rem !important;
+    vertical-align: middle !important;
+    min-height: 3.5rem !important;
+}
+
+.sapMListTblCell .sapMColumnHeader{
+    padding: 0.5rem 1rem !important;
+}
+.modernTable .sapMListTblRow {
+    min-height: 4rem !important;
+}
+
+/* === Unified Table Cell Styles === */
+.tableCellText {
+    font-size: 0.875rem !important;
+    color: #2c3e50 !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+}
+
+.tableCellBold {
+    font-weight: 600 !important;
+    color: #1e88e5 !important;
+}
+
+.tableCellNumber {
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+}
+
+.tableCellNumber .sapMObjectNumberText {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+}
+
+.tableCellNumber .sapMObjectNumberUnit {
+    font-size: 0.75rem !important;
+    font-weight: 400 !important;
+    color: #6c757d !important;
+    margin-left: 0.25rem !important;
+}
+
+.tableCellStatus {
+    font-size: 0.8rem !important;
+}
+
+.tableCellStatus .sapMObjStatusText {
+    font-size: 0.8rem !important;
+}
+
+.modernTable .sapMText {
+    font-size: 0.875rem !important;
+    color: #2c3e50 !important;
+}
+
+.modernTable .sapMObjectIdentifier .sapMObjectIdentifierTitle {
+    color: #1e88e5 !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+}
+
+.modernTable .sapMObjectIdentifier .sapMObjectIdentifierTitle:hover {
+    text-decoration: underline;
+}
+
+/* === Enhanced Cell Styles === */
+.tableCellDescription {
+    color: #6c757d !important;
+    font-style: normal;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tableCellAmount {
+    font-weight: 700 !important;
+}
+
+.tableCellAmount .sapMObjectNumberText {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #28a745 !important;
+}
+
+.tableCellDate {
+    font-family: 'Courier New', monospace !important;
+    font-size: 0.85rem !important;
+    color: #6c757d !important;
+}
+
+.priorityStatus {
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* === Icon Colors === */
+.sapUiIcon {
+    transition: color 0.2s ease;
+}
+
+.sapFCardHeader .sapUiIcon {
+    color: #0070f2 !important;
+}
+
+/* === Badge Style === */
+.sapMObjectStatus {
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 12px !important;
+}
+
+/* === Enhanced Shadows === */
+.shadowLight {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.shadowMedium {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.shadowStrong {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* === Gradient Backgrounds === */
+.gradientBlue {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.gradientGreen {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+    color: white !important;
+}
+
+/* === Text Styles === */
+.textBold {
+    font-weight: 700 !important;
+}
+
+.textSemiBold {
+    font-weight: 600 !important;
+}
+
+.textMuted {
+    color: #6c757d !important;
+}
+
+/* === Spacing Utilities === */
+.mt-1 { margin-top: 0.5rem !important; }
+.mt-2 { margin-top: 1rem !important; }
+.mb-1 { margin-bottom: 0.5rem !important; }
+.mb-2 { margin-bottom: 1rem !important; }
+.p-1 { padding: 0.5rem !important; }
+.p-2 { padding: 1rem !important; }
+
+/* === Detail Page Styles === */
+.detailPageModern {
+    font-size: 1.25rem !important;
+    background: #F5F7FA !important;
+    width: 100% !important;
+}
+
+.detailPageModern .sapMPageBgSolid,
+.detailPageModern .sapMPageContent {
+    font-size: 2rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Detail Page Header - Same style as List Page */
+.detailPageModern .sapMPageHeader {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-radius: 0 0 12px 12px !important;
+    margin: 0 1.5rem 0 1.5rem !important;
+    width: calc(100% - 4rem) !important;
+    max-width: calc(100% - 4rem) !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+}
+
+/* Force Bar to fill entire header width */
+.detailPageModern .sapMPageHeader .sapMBar,
+.detailPageModern .sapMPageHeader .sapMBar-CTX,
+.detailPageModern .sapMPageHeader .sapMHeader-CTX {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 1.5rem !important;
+    box-sizing: border-box !important;
+}
+
+.detailPageModern .sapMPageHeader .sapMBar .sapMBarLeft{
+    padding-left: 0 !important;
+}
+
+.detailPageModern .sapMPageHeader .sapMTitle {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    font-size: 1.75rem !important;
+    letter-spacing: -0.5px;
+    margin: 0 !important;
+}
+
+.sapMTitle.sapMTitleStyleAuto.sapMTitleNoWrap.sapUiSelectable.sapMTitleMaxWidth.sapMBarChild > span {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    font-size: 2rem !important;
+    letter-spacing: -0.5px;
+}
+
+.modernDynamicPage {
+    background: #F5F7FA !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.modernDynamicPage .sapFDynamicPageContent {
+    padding: 0 !important;
+}
+
+.modernDynamicPage .sapUiSmallMargin {
+    margin: 1.5rem 0 !important;
+    padding: 0 1.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.headerCardStyle {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+.headerGrid {
+    gap: 1rem;
+}
+
+.headerInfoBox {
+    background: #f8f9fa !important;
+    padding: 1.5rem !important;
+    border-radius: 8px !important;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-left: 4px solid #0070f2 !important;
+}
+
+.headerInfoBox:hover {
+    background: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-2px);
+}
+
+.headerValue {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    margin: 0.5rem 0 !important;
+}
+
+.headerLabel {
+    font-size: 0.875rem !important;
+    color: #6c757d !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* === Form Section Cards === */
+.sapMPanel .sapMPanelContent {
+    padding: 1.5rem !important;
+}
+
+.sapFSimpleForm {
+    background: #ffffff !important;
+    border-radius: 8px !important;
+}
+
+.sapFSimpleForm .sapMLabel {
+    color: #32363a !important;
+    font-weight: 500 !important;
+}
+
+.sapFSimpleForm .sapMInput,
+.sapFSimpleForm .sapMComboBox,
+.sapFSimpleForm .sapMDatePicker {
+    background: #f8f9fa !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+.sapFSimpleForm .sapMInput:focus,
+.sapFSimpleForm .sapMComboBox:focus,
+.sapFSimpleForm .sapMDatePicker:focus {
+    background: #ffffff !important;
+    box-shadow: 0 0 0 2px rgba(0, 112, 242, 0.2) !important;
+}
+
+/* === Title Enhancements === */
+.sapFDynamicPageTitle .sapMTitle {
+    color: #0070f2 !important;
+    font-weight: 700 !important;
+}
+
+.sapFDynamicPageTitle .sapUiIcon {
+    vertical-align: middle;
+}
+
+/* === Process Flow Table === */
+.sapMPanel {
+    margin-bottom: 1rem;
+}
+
+.sapMPanelHdr {
+    background: linear-gradient(to right, #0070f2, #0053ba) !important;
+    color: #ffffff !important;
+    padding: 1rem !important;
+}
+
+.sapMPanelWrappingDiv {
+    border-radius: 8px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* === Improved Input Fields === */
+.sapMInputBaseInner {
+    border: 1px solid #e0e0e0 !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.sapMInputBaseInner:hover {
+    border-color: #0070f2 !important;
+}
+
+.sapMInputBaseInner:focus {
+    border-color: #0070f2 !important;
+    box-shadow: 0 0 0 2px rgba(0, 112, 242, 0.1) !important;
+}
+
+/* === Action Buttons Layout === */
+.sapFDynamicPageTitle .sapMBtn {
+    margin-left: 0.5rem;
+}
+
+/* === Emphasize Important Values === */
+.sapMObjectNumber.sapMObjectNumberEmph {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+}
+
+/* === Icon Animations === */
+.sapUiIcon {
+    transition: all 0.2s ease;
+}
+
+.headerInfoBox .sapUiIcon {
+    margin-bottom: 0.5rem;
+}
+
+/* === Improved Panel Headers === */
+.sapMPanelHdr .sapMPanelHdrText {
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    
+}
+
+/* === Form Title Sections === */
+.sapUiFormTitle {
+    color: #0070f2 !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    margin-top: 1rem !important;
+    padding-bottom: 0.5rem !important;
+    border-bottom: 2px solid #e0e0e0 !important;
+}
+
+/* AI header button styling (appended) */
+.aiHeaderBtn {
+    margin-left: 0.5rem !important;
+    /* keep legacy class but make it unobtrusive */
+    background: transparent !important;
+    color: inherit !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.sapMFlexBox.sapMVBox.sapMFlexBoxJustifyEnd.sapMFlexBoxAlignItemsStretch.sapMFlexBoxWrapNoWrap.sapMFlexBoxAlignContentStretch.sapMFlexBoxBGTransparent.filterBox {
+  padding-left: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+
+/* AI assistant button - square shape with no hover border */
+.aiIconBtn {
+    background-color: #7B3FF2 !important;
+    border: none !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    padding: 0 0.25rem !important;
+    font-size: 0.875rem !important;
+    height: 2.5rem !important;
+    min-height: 2.5rem !important;
+    box-shadow: 0 2px 4px rgba(123, 63, 242, 0.2) !important;
+    text-align: center;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    padding: 0 4px !important;
+    margin-right: 5px !important;
+}
+.aiIconBtn .sapMBtnInner {
+    height: 100% !important;
+    width: 100% !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+.aiIconBtn .sapMBtnContent {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.875rem !important;
+    color: #FFFFFF !important;
+    padding: 0 !important;
+    gap: 0.5rem !important;
+}
+.aiIconBtn .sapMBtnIcon, .aiIconBtn img {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.aiIconBtn:hover {
+    background-color: #6A2FE0 !important;
+    border: none !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(123, 63, 242, 0.4) !important;
+}
+.aiIconBtn:hover .sapMBtnInner {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+.aiIconBtn:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 4px rgba(123, 63, 242, 0.3) !important;
+    border: none !important;
+}
+.aiIconBtn:focus, .aiIconBtn:focus-visible {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 2px rgba(123,63,242,0.35) !important;
+}
+.aiIconBtn:focus .sapMBtnInner,
+.aiIconBtn:focus-visible .sapMBtnInner {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* If the SVG itself has a filled rectangle background, use an inline SVG without background or override via mask if available. */
+
+/* Very specific selectors to color PR icon and PR number text based on priority row */
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh .sapUiTinyMarginBegin .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh .sapUiTinyMarginBegin .sapMText {
+    color: #dc3545 !important; /* red */
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh .priorityFlag,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh .priorityFlag {
+    color: #dc3545 !important;
+}
+
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium .sapUiTinyMarginBegin .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium .sapUiTinyMarginBegin .sapMText {
+    color: #fd7e14 !important; /* orange */
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium .priorityFlag,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium .priorityFlag {
+    color: #fd7e14 !important;
+}
+
+.colors-enabled.modernTable .sapMLIB.priorityRowLow .sapUiTinyMarginBegin .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow .sapUiTinyMarginBegin .sapMText {
+    color: #28a745 !important; /* green */
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowLow .priorityFlag,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow .priorityFlag {
+    color: #28a745 !important;
+}
+.sapUiTinyMarginBegin{
+    margin: 0 10px 0 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* When the table does NOT have the 'colors-enabled' class, neutralize priority visuals
+   so initial load shows no colored accents. Adding the class (via controller) enables colors. */
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowHigh,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowHigh {
+    background: none !important;
+    border-left: none !important;
+}
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowHigh .sapMText,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowHigh .sapMText {
+    color: inherit !important;
+    font-weight: 400 !important;
+}
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowMedium,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowMedium {
+    background: none !important;
+    border-left: none !important;
+}
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowMedium .sapMText,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowMedium .sapMText {
+    color: inherit !important;
+    font-weight: 400 !important;
+}
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowLow,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowLow {
+    background: none !important;
+    border-left: none !important;
+}
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowLow .sapMText,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowLow .sapMText {
+    color: inherit !important;
+    font-weight: 400 !important;
+}
+
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowHigh td:nth-child(1) .sapMText,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowHigh td:nth-child(1) .sapMText {
+    color: inherit !important;
+}
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowMedium td:nth-child(1) .sapMText,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowMedium td:nth-child(1) .sapMText {
+    color: inherit !important;
+}
+.modernTable:not(.colors-enabled) .sapMLIB.priorityRowLow td:nth-child(1) .sapMText,
+.modernTable:not(.colors-enabled) .sapMListTblRow.priorityRowLow td:nth-child(1) .sapMText {
+    color: inherit !important;
+}
+
+/* Force first-column coloring based on row priority by targeting the table cell (td:nth-child(1)).
+   This works regardless of the inner control markup and is robust across re-renders. */
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh td:nth-child(1) .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh td:nth-child(1) .sapMText {
+    color: #dc3545 !important;
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowHigh td:nth-child(1) .priorityFlag,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowHigh td:nth-child(1) .priorityFlag {
+    color: #dc3545 !important;
+}
+
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium td:nth-child(1) .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium td:nth-child(1) .sapMText {
+    color: #fd7e14 !important;
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowMedium td:nth-child(1) .priorityFlag,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowMedium td:nth-child(1) .priorityFlag {
+    color: #fd7e14 !important;
+}
+
+.colors-enabled.modernTable .sapMLIB.priorityRowLow td:nth-child(1) .sapMText,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow td:nth-child(1) .sapMText {
+    color: #28a745 !important;
+    font-weight: 700 !important;
+}
+.colors-enabled.modernTable .sapMLIB.priorityRowLow td:nth-child(1) .priorityFlag,
+.colors-enabled.modernTable .sapMListTblRow.priorityRowLow td:nth-child(1) .priorityFlag {
+    color: #28a745 !important;
+}
+
+/* ==================== Page Sections Layout Optimization ==================== */
+.compactSection {
+    background: #FFFFFF !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    transition: box-shadow 0.3s ease !important;
+}
+
+.compactSection:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.compactSection:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Section Titles */
+.sectionTitle {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #1D2D3E !important;
+    /* margin: 0 0 1rem 0 !important; */
+    padding-bottom: 0.75rem !important;
+    border-bottom: 2px solid #E8F0FE !important;
+    letter-spacing: -0.02em !important;
+}
+
+.compactSection .sapMLabel,
+.compactSection .sapMText,
+.compactSection .sapMInput,
+.compactSection .sapMObjectNumber {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+}
+
+/* High-specificity override for Clear All button to ensure no visible border/shadow/outlines
+   This is appended at the end to defeat any later rules that may reintroduce box-shadow or outline. */
+div[id="container-demo.purchaserequest---List--filterBar"] .clearFilterBtn,
+.clearFilterBtn {
+    border: none !important;
+    box-shadow: none !important; /* ensure no border-like shadow */
+    outline: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+}
+
+.clearFilterBtn:hover,
+.clearFilterBtn:focus,
+.clearFilterBtn:active {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* === Gantt Chart Splitter Bar Adjustments === */
+/* Reduce the height of the splitter bar between table and timeline */
+.sapGanttChartWithTable .sapUiSplitBar {
+    height: 2px !important;
+    background-color: #e0e0e0 !important;
+    border: none !important;
+    margin: 0 !important;
+}
+
+.sapGanttChartWithTable .sapUiSplitBar:hover {
+    background-color: #0070f2 !important;
+    height: 3px !important;
+}
+
+.sapGanttChartWithTable .sapUiSplitBar:active {
+    background-color: #0053ba !important;
+}
+
+/* Ensure splitter grips are minimal */
+.sapGanttChartWithTable .sapUiSplitBarGrip {
+    display: none !important;
+}
+
+/* === Generate Button Animation (removed ::before pseudo-element to fix double button issue) === */
+
+/* === Typing Animation Cursor === */
+.aiTypingCursor {
+    border-right: 2px solid #0070f2;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { border-color: #0070f2; }
+    51%, 100% { border-color: transparent; }
+}
+
+/* === AI Disclaimer Dialog === */
+#aiDisclaimerDialog {
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+}
+
+#aiDisclaimerDialog .sapMDialogTitle {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+#aiDisclaimerDialog .sapMDialogContent {
+    padding: 2rem !important;
+}
+
+#aiDisclaimerDialog .sapMText {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    color: #2c3e50 !important;
+}
+
+#aiDisclaimerDialog .sapMCheckBox {
+    margin-top: 1rem !important;
+}
+
+#aiDisclaimerDialog .sapMDialogFooter {
+    padding: 1rem 2rem !important;
+    border-top: 1px solid #e0e0e0 !important;
+    background: #f8f9fa !important;
+    border-radius: 0 0 12px 12px !important;
+}
+
+/* === AI Information Section Styles === */
+/* Generate Button (Purple) - Larger size with centered text */
+.aiGenerateBtn {
+    background-color: #7B3FF2 !important;
+    border-color: #7B3FF2 !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+    min-width: 120px !important;
+    box-shadow: 0 2px 4px rgba(123, 63, 242, 0.2) !important;
+    text-align: center;
+    margin-right: 1rem !important;
+}
+
+/* Remove background from inner span to avoid double layer */
+.aiGenerateBtn .sapMBtnInner {
+    height: 100% !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.aiGenerateBtn .sapMBtnContent {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.aiGenerateBtn:hover {
+    background-color: #6A2FE0 !important;
+    border-color: #6A2FE0 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(123, 63, 242, 0.4) !important;
+}
+
+.aiGenerateBtn:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 4px rgba(123, 63, 242, 0.3) !important;
+}
+
+/* Icon always visible with animation */
+.aiGenerateBtn .sapMBtnIcon {
+    width: 1rem !important;
+    opacity: 1 !important;
+    margin-right: 0.5rem !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Information Title */
+.aiInfoTitle {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+    color: #1D2D3E !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    letter-spacing: -0.02em !important;
+}
+
+/* Content Container with Border */
+.aiContentContainer {
+    border: 1px solid #E8E8E8 !important;
+    border-radius: 8px !important;
+    background: #FAFBFC !important;
+    padding: 1.25rem !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Text Area Styling */
+.aiTextArea {
+    border: none !important;
+    border-radius: 6px !important;
+    background-color: #FFFFFF !important;
+    font-size: 0.875rem !important;
+    line-height: 1.7 !important;
+    padding: 0 !important;
+}
+
+.aiTextArea .sapMTextAreaInner {
+    background-color: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 6px !important;
+    color: #2C3E50 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.7 !important;
+    padding: 0.875rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.aiTextArea .sapMTextAreaInner:focus {
+    background-color: #FFFFFF !important;
+    border: 2px solid #7B3FF2 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(123, 63, 242, 0.1) !important;
+}
+
+/* Warning Message Strip */
+.aiWarningStrip {
+    width: 100% !important;
+}
+
+/* Bottom Row with Checkbox and Buttons */
+/* .aiBottomRow {
+    padding: 0.25rem 0 !important;
+} */
+
+/* Don't Show Container */
+.aiDontShowContainer {
+    flex: 1 1 auto !important;
+}
+
+/* Disclaimer Checkbox */
+.aiDisclaimerCheckbox {
+    flex-shrink: 0 !important;
+}
+
+/* Don't Show Text */
+.aiDontShowText {
+    font-size: 0.75rem !important;
+    color: #32363A !important;
+    white-space: nowrap !important;
+}
+
+/* Button Group Container */
+.aiButtonGroup {
+    flex-shrink: 0 !important;
+}
+
+/* Action Buttons */
+.aiOkBtn {
+    text-align: center !important;
+    background-color: #0070F2 !important;
+    border-color: #0070F2 !important;
+    color: #FFFFFF !important;
+    border-radius: 12px !important;
+    padding: 0.625rem 1.75rem !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    box-shadow: 0 2px 6px rgba(0, 112, 242, 0.25) !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Remove all borders and outlines from inner elements */
+.aiOkBtn .sapMBtnInner,
+.aiOkBtn .sapMBtnInner *,
+.aiOkBtn *,
+.aiOkBtn bdi,
+.aiOkBtn span {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.aiOkBtn:hover *,
+.aiOkBtn:focus *,
+.aiOkBtn:active *,
+.aiOkBtn:focus .sapMBtnInner,
+.aiOkBtn:active .sapMBtnInner,
+.aiOkBtn:focus .sapMBtnInner *,
+.aiOkBtn:active .sapMBtnInner * {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.aiOkBtn:hover {
+    background-color: #0053BA !important;
+    border-color: #0053BA !important;
+    box-shadow: 0 4px 12px rgba(0, 112, 242, 0.35) !important;
+    transform: translateY(-1px) !important;
+}
+
+.aiOkBtn:active {
+    transform: translateY(0) !important;
+}
+
+.aiOkBtn:focus,
+.aiOkBtn:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(0, 112, 242, 0.3) !important;
+}
+
+.aiCancelBtn {
+    background-color: #FFFFFF !important;
+    border: 1px solid #D8E2EC !important;
+    color: #5A6C7D !important;
+    border-radius: 12px !important;
+    padding: 0.625rem 1.75rem !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: all 0.2s ease !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Remove all borders and outlines from inner elements */
+.aiCancelBtn .sapMBtnInner,
+.aiCancelBtn .sapMBtnInner *,
+.aiCancelBtn *,
+.aiCancelBtn bdi,
+.aiCancelBtn span {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.aiCancelBtn:hover *,
+.aiCancelBtn:focus *,
+.aiCancelBtn:active *,
+.aiCancelBtn:focus .sapMBtnInner,
+.aiCancelBtn:active .sapMBtnInner,
+.aiCancelBtn:focus .sapMBtnInner *,
+.aiCancelBtn:active .sapMBtnInner * {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.aiCancelBtn:hover {
+    background-color: #F8FAFE !important;
+    border-color: #B8C8D8 !important;
+    color: #2C3E50 !important;
+    transform: translateY(-1px) !important;
+}
+
+.aiCancelBtn:active {
+    transform: translateY(0) !important;
+}
+
+.aiCancelBtn:focus,
+.aiCancelBtn:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(184, 200, 216, 0.3) !important;
+}
+
+/* === Purchase Request Overview Styles === */
+.overviewGrid {
+    gap: 1.25rem !important;
+    padding: 0 !important;
+}
+
+.overviewCard {
+    background: linear-gradient(to bottom, #FFFFFF, #FAFBFC) !important;
+    border: 1px solid #D8E2EC !important;
+    border-radius: 10px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s ease !important;
+    height: 100% !important;
+    padding: 0.5rem 0.5rem 0 !important;
+}
+
+.overviewCard:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+    transform: translateY(-3px) !important;
+    border-color: #B8C8D8 !important;
+}
+
+.overviewCard .cardTitle {
+    color: #0070F2 !important;
+    font-weight: 600 !important;
+    font-size: 1.0625rem !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 0.625rem !important;
+    border-bottom: 2px solid #E8F0FE !important;
+    letter-spacing: -0.01em !important;
+}
+
+.fieldRow {
+    padding: 0.25rem 0 !important;
+    border-bottom: 1px solid #F0F2F5 !important;
+    min-height: 2.75rem !important;
+    align-items: center !important;
+    transition: background-color 0.15s ease !important;
+}
+
+.fieldRow:hover {
+    background-color: #F8FAFE !important;
+    border-radius: 4px !important;
+    margin: 0 -0.25rem !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+}
+
+.fieldRow:last-child {
+    border-bottom: none !important;
+}
+
+.fieldRowHighlight {
+    background: linear-gradient(to right, #F0F8FF, #F8FAFE) !important;
+    padding: 0.875rem 0.75rem !important;
+    margin: 0.5rem -0.75rem 0 -0.75rem !important;
+    border-radius: 6px !important;
+    border: 1px solid #D0E4F7 !important;
+    box-shadow: 0 1px 3px rgba(0, 112, 242, 0.08) !important;
+    margin-left: 1rem;
+}
+
+.fieldLabel {
+    color: #5A6C7D !important;
+    font-size: 0.8125rem !important;
+    font-weight: 500 !important;
+    min-width: 110px !important;
+    letter-spacing: 0.01em !important;
+}
+
+.fieldLabelBold {
+    font-weight: 600 !important;
+    color: #1D2D3E !important;
+}
+
+.fieldValue {
+    color: #2C3E50 !important;
+    font-size: 0.875rem !important;
+    text-align: right !important;
+    word-break: break-word !important;
+    font-weight: 500 !important;
+}
+
+.fieldValueBold {
+    font-weight: 700 !important;
+    font-size: 1.0625rem !important;
+    color: #1D2D3E !important;
+}
+
+.fieldValue .sapMObjectNumber {
+    font-size: 0.875rem !important;
+}
+
+.fieldValueBold .sapMObjectNumber {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+.fieldValueBold .sapMObjectNumberText {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+/* ==================== Email Configuration Section ==================== */
+.emailConfigHeader {
+    background: linear-gradient(to right, #F8FAFE, #F0F4FA) !important;
+    border: 1px solid #D8E2EC !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 1rem 1.25rem !important;
+    transition: background 0.2s ease !important;
+}
+
+.emailConfigHeader:hover {
+    background: linear-gradient(to right, #F0F4FA, #E8F0FE) !important;
+}
+
+.emailConfigTitle {
+    font-weight: 600 !important;
+    color: #1D2D3E !important;
+    font-size: 1.125rem !important;
+    letter-spacing: -0.01em !important;
+}
+
+.emailExpandBtn {
+    min-width: 2.5rem !important;
+    height: 2.5rem !important;
+    transition: transform 0.2s ease !important;
+}
+
+.emailExpandBtn:hover {
+    transform: scale(1.1) !important;
+}
+
+.emailExpandBtn .sapMBtnIcon {
+    color: #0070F2 !important;
+    font-size: 1.125rem !important;
+}
+
+.emailConfigContent {
+    background: #FAFBFC !important;
+    border: 1px solid #D8E2EC !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03) !important;
+}
+
+.emailConfigInner {
+    padding: 1.5rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.emailLabel {
+    font-weight: 500 !important;
+    color: #2C3E50 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.emailInput {
+    width: 100% !important;
+}
+
+.emailInput input {
+    border: 1px solid #D8E2EC !important;
+    border-radius: 6px !important;
+    padding: 0.625rem 0.875rem !important;
+    background: #FFFFFF !important;
+    transition: all 0.2s ease !important;
+    font-size: 0.875rem !important;
+}
+
+.emailInput input:hover {
+    border-color: #B8C8D8 !important;
+}
+
+.emailInput input:focus {
+    border-color: #0070F2 !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 3px rgba(0, 112, 242, 0.1) !important;
+    outline: none !important;
+}
+
+.emailContentArea {
+    width: 100% !important;
+}
+
+.emailContentArea textarea {
+    background: #FFFFFF !important;
+    border: 1px solid #D8E2EC !important;
+    border-radius: 6px !important;
+    padding: 0.875rem !important;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif !important;
+    font-size: 0.875rem !important;
+    color: #2C3E50 !important;
+    line-height: 1.7 !important;
+    resize: vertical !important;
+    transition: all 0.2s ease !important;
+}
+
+.emailContentArea textarea:hover {
+    border-color: #B8C8D8 !important;
+}
+
+.emailContentArea textarea:focus {
+    border-color: #0070F2 !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 3px rgba(0, 112, 242, 0.1) !important;
+    outline: none !important;
+}
+
+.sendEmailBtn {
+    background-color: #0070F2 !important;
+    border-color: #0070F2 !important;
+    color: #FFFFFF !important;
+    border-radius: 6px !important;
+    padding: 0.625rem 1.75rem !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    box-shadow: 0 2px 6px rgba(0, 112, 242, 0.25) !important;
+    transition: all 0.2s ease !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sendEmailBtn .sapMBtnInner {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.sendEmailBtn:hover {
+    background-color: #0053BA !important;
+    border-color: #0053BA !important;
+    box-shadow: 0 4px 12px rgba(0, 112, 242, 0.35) !important;
+    transform: translateY(-1px) !important;
+}
+
+.sendEmailBtn:active {
+    transform: translateY(0) !important;
+}
+
+/* ==================== Responsive Optimizations ==================== */
+@media (max-width: 1024px) {
+    .modernDynamicPage .sapUiSmallMargin {
+        margin: 1rem !important;
+    }
+    
+    .compactSection {
+        padding: 1.25rem !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    .sectionTitle {
+        font-size: 1.125rem !important;
+    }
+    
+    .overviewGrid {
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .modernDynamicPage .sapUiSmallMargin {
+        margin: 0.75rem !important;
+    }
+    
+    .compactSection {
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    .sectionTitle {
+        font-size: 1.0625rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+    
+    .aiGenerateBtn {
+        font-size: 0.875rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .overviewCard {
+        padding: 1rem !important;
+    }
+    
+    .fieldRow {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 0.5rem 0 !important;
+    }
+    
+    .fieldLabel,
+    .fieldValue {
+        text-align: left !important;
+        width: 100% !important;
+    }
+    
+    .fieldValue {
+        margin-top: 0.25rem !important;
+    }
+}
+
+/* ==================== Typography Enhancement ==================== */
+body {
+    font-family: '72', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* ==================== Smooth Scrolling ==================== */
+.sapFDynamicPage {
+    scroll-behavior: smooth !important;
+}
+
+/* ==================== Gantt Chart Table Balance ==================== */
+/* Optimize Gantt table column width distribution - Reduce left table width */
+#ganttContainer .sapUiTableCtrl {
+    table-layout: fixed !important;
+    width: 30% !important;
+    max-width: 450px !important;
+}
+
+#ganttContainer .sapUiTableCol:nth-child(1) {
+    width: 40% !important;
+    min-width: 150px !important;
+    max-width: 180px !important;
+}
+
+#ganttContainer .sapUiTableCol:nth-child(2),
+#ganttContainer .sapUiTableCol:nth-child(3) {
+    width: 22% !important;
+    min-width: 90px !important;
+    max-width: 110px !important;
+}
+
+#ganttContainer .sapUiTableCol:nth-child(4) {
+    width: 16% !important;
+    min-width: 70px !important;
+    max-width: 90px !important;
+}
+
+/* Force Gantt chart area to take more space */
+#ganttChart .sapGanttChartCnt {
+    flex: 1 1 70% !important;
+    min-width: 60% !important;
+}
+
+/* Ensure the table and chart container uses flexbox properly */
+#ganttChart .sapGanttChartWithTableContainer {
+    display: flex !important;
+}
+
+#ganttChart .sapUiTableCnt {
+    flex: 0 0 30% !important;
+    max-width: 450px !important;
+}
+
+/* === List Page Footer === */
+.modernListPage .sapMPageFooter {
+    padding: 0 !important;
+    margin: 0 1.5rem 1.5rem 1.5rem !important;
+    width: calc(100% - 4rem) !important;
+    max-width: calc(100% - 3rem) !important;
+    border-radius: 12px !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    box-sizing: border-box !important;
+}
+
+/* Set footer toolbar padding to align with content */
+.modernListPage .sapMPageFooter .sapMOverflowToolbar,
+.modernListPage .sapMPageFooter .sapMTB {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+}
+
+/* === Gantt Contact Person Link Styles === */
+.sapGanttChartWithTableContainer .sapMLink {
+    color: #0070F2 !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+.sapGanttChartWithTableContainer .sapMLink:hover {
+    color: #0053BA !important;
+    text-decoration: underline !important;
+    transform: translateX(2px) !important;
+}
+
+.sapGanttChartWithTableContainer .sapMLink:active {
+    color: #003D8F !important;
+}
+
+/* === Email Popover Styles === */
+.emailPopover {
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.emailPopover .sapMPopoverCont {
+    padding: 0.5rem 0.5rem !important;
+    min-height: auto !important;
+}
+
+.emailPopover .sapMText {
+    color: #2c3e50 !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    line-height: 1.8 !important;
+}
+
+.emailPopover .sapUiIcon {
+    margin-right: 0.375rem !important;
+    font-size: 1rem !important;
+}
+
+.emailPopover .sapMVBox,
+.emailPopover .sapMHBox {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.sapUiSmallMarginBegin{
+    margin-left: 0rem !important;
+}
+
+/* ========================================
+   Grid Table Priority Row Highlighting
+   ======================================== */
+
+/* Colors are controlled by the colors-enabled class on the table */
+.colors-enabled .sapUiTableRow.priorityRowHigh,
+.colors-enabled .sapUiTableRow.priorityRowHigh > td {
+    background-color: #ffebee !important;
+    border-left: 4px solid #ef5350 !important;
+    color: #c62828 !important;
+    font-weight: 500 !important;
+}
+
+.colors-enabled .sapUiTableRow.priorityRowHigh:hover,
+.colors-enabled .sapUiTableRow.priorityRowHigh:hover > td {
+    background-color: #ffcdd2 !important;
+    color: #b71c1c !important;
+}
+
+.colors-enabled .sapUiTableRow.priorityRowHigh.sapUiTableRowSel,
+.colors-enabled .sapUiTableRow.priorityRowHigh.sapUiTableRowSel > td {
+    background-color: #ef9a9a !important;
+    color: #b71c1c !important;
+}
+
+/* Medium Priority - Orange */
+.colors-enabled .sapUiTableRow.priorityRowMedium,
+.colors-enabled .sapUiTableRow.priorityRowMedium > td {
+    background-color: #fff3e0 !important;
+    border-left: 4px solid #ff9800 !important;
+    color: #e65100 !important;
+    font-weight: 500 !important;
+}
+
+.colors-enabled .sapUiTableRow.priorityRowMedium:hover,
+.colors-enabled .sapUiTableRow.priorityRowMedium:hover > td {
+    background-color: #ffe0b2 !important;
+    color: #d84315 !important;
+}
+
+.colors-enabled .sapUiTableRow.priorityRowMedium.sapUiTableRowSel,
+.colors-enabled .sapUiTableRow.priorityRowMedium.sapUiTableRowSel > td {
+    background-color: #ffcc80 !important;
+    color: #d84315 !important;
+}
+
+/* Low Priority - Green */
+.colors-enabled .sapUiTableRow.priorityRowLow,
+.colors-enabled .sapUiTableRow.priorityRowLow > td {
+    background-color: #e8f5e9 !important;
+    border-left: 4px solid #66bb6a !important;
+    color: #2e7d32 !important;
+    font-weight: 500 !important;
+}
+
+.colors-enabled .sapUiTableRow.priorityRowLow:hover,
+.colors-enabled .sapUiTableRow.priorityRowLow:hover > td {
+    background-color: #c8e6c9 !important;
+    color: #1b5e20 !important;
+}
+
+.colors-enabled .sapUiTableRow.priorityRowLow.sapUiTableRowSel,
+.colors-enabled .sapUiTableRow.priorityRowLow.sapUiTableRowSel > td {
+    background-color: #a5d6a7 !important;
+    color: #1b5e20 !important;
+}
+
+/* ==================== AI Popover Styles ==================== */
+.aiPopover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 12px !important;
+}
+
+.aiPopover .sapMPopoverCont {
+    padding: 0 !important;
+}
+
+.aiPopover .sapMPopoverArr {
+    display: none !important;
+}
+
+.aiPopoverContent {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-radius: 12px !important;
+    padding: 1rem 0.75rem !important;
+}
+
+.aiPopoverContent .sapUiVBox {
+    gap: 0 !important;
+}
+
+.aiPopoverContent .sapMHBox {
+    padding: 0 !important;
+}
+
+.aiPopoverDivider {
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.1) 20%, 
+        rgba(0, 0, 0, 0.1) 80%, 
+        transparent 100%) !important;
+}
+
+.aiPopoverBadge {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+}
+
+.aiPopoverBadgeHigh {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%) !important;
+    color: #c62828 !important;
+    border: 1px solid #ef9a9a !important;
+}
+
+.aiPopoverBadgeHigh .sapUiIcon {
+    color: #d32f2f !important;
+}
+
+.aiPopoverBadgeMedium {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%) !important;
+    color: #e65100 !important;
+    border: 1px solid #ffcc80 !important;
+}
+
+.aiPopoverBadgeMedium .sapUiIcon {
+    color: #f57c00 !important;
+}
+
+.aiPopoverBadgeLow {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%) !important;
+    color: #2e7d32 !important;
+    border: 1px solid #a5d6a7 !important;
+}
+
+.aiPopoverBadgeLow .sapUiIcon {
+    color: #388e3c !important;
+}
+
+.aiPopoverText {
+    line-height: 1.6 !important;
+    color: #424242 !important;
+    font-size: 0.875rem !important;
+}
+
+.aiPopover .sapMTitle {
+    color: #1976d2 !important;
+    font-weight: 600 !important;
+}
+
+.aiPopover .sapMLabel {
+    color: #424242 !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}

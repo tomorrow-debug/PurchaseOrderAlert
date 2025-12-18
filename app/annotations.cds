@@ -1,64 +1,227 @@
-using IncidentService as service from '../srv/incidentservice';
-using from '../srv/common';
+using PurchaseRequestService as service from '../srv/incidentservice';
 
-annotate service.Incidents with @(UI : {
-    //basic list report annotations
-    //the presentation variant defines a per default ascending sorting for the LR table
-    //https://github.com/SAP/odata-vocabularies/blob/master/vocabularies/Common.md#SortOrderType
-    // PresentationVariant : {
-    //     SortOrder      : [{
-    //         $Type    : 'Common.SortOrderType',
-    //         Property : priority_code
-    //     }],
-    //     Visualizations : ['@UI.LineItem']
-    // },
+// Define aggregation capabilities
+annotate service.PurchaseRequests with @Aggregation.ApplySupported : {
+    Transformations : [
+        'aggregate',
+        'groupby',
+        'filter'
+    ],
+    Rollup : #None,
+    PropertyRestrictions : true,
+    GroupableProperties : [
+        priorityName,
+        material,
+        deliveryDate,
+        identifier,
+        shortText,
+        purchaseOrder
+    ],
+    AggregatableProperties : [
+        {
+            Property : recordCount,
+            SupportedAggregationMethods : [
+                sum,
+                min,
+                max,
+                avg
+            ],
+            RecommendationListRanking : 1
+        },
+        {
+            Property : purchaseQuantity
+        },
+        {
+            Property : totalValue
+        },
+        {
+            Property : price
+        }
+    ]
+};
+
+// Define which properties can be aggregated and grouped
+annotate service.PurchaseRequests with {
+    // Record count for counting number of records
+    recordCount @Analytics.Measure @Aggregation.default: #SUM @Common.Label: 'Number of Requests';
+    
+    // Measures (aggregatable)
+    purchaseQuantity @Analytics.Measure @Aggregation.default: #SUM;
+    totalValue @Analytics.Measure @Aggregation.default: #SUM;
+    price @Analytics.Measure @Aggregation.default: #AVG;
+    
+    // Dimensions (groupable)
+    priorityName @Analytics.Dimension @Common.Label: 'Priority';
+    material @Analytics.Dimension;
+    deliveryDate @Analytics.Dimension;
+};
+
+// DataPoint for count display with criticality
+annotate service.PurchaseRequests with @UI.DataPoint #CountRequests : {
+    Value : recordCount,
+    Title : 'Count of Requests',
+    Criticality : priorityCriticality
+};
+
+annotate service.PurchaseRequests with @(
+    UI : {
     //the lineItem annotation defines the table columns for UI display of the annotated entity
-    //https://github.com/SAP/odata-vocabularies/blob/master/vocabularies/UI.md#LineItem
-    //Table columns are defined by building blocks of type DataFieldAbstract
-    //https://github.com/SAP/odata-vocabularies/blob/master/vocabularies/UI.md#DataFieldAbstract
     LineItem : [
         {
+            $Type       : 'UI.DataField',
+            Value       : '●',
+            Label       : '',
+            Criticality : priority.criticality,
+            ![@HTML5.CssDefaults] : {width : '3rem'}
+        },
+        {
             $Type : 'UI.DataField',
-            Value : identifier
+            Value : identifier,
+            Label : 'PR Number'
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : material,
+            Label : 'Material'
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : shortText,
+            Label : 'Description'
         },
         {
             $Type                     : 'UI.DataField',
             Value                     : priority_code,
+            Label                     : 'Priority',
             Criticality               : priority.criticality,
             CriticalityRepresentation : #WithoutIcon
         },
         {
             $Type : 'UI.DataField',
-            Value : incidentStatus_code
+            Value : requestStatus_code,
+            Label : 'Status'
         },
         {
             $Type : 'UI.DataField',
-            Value : category_code
+            Value : purchaseQuantity,
+            Label : 'Quantity'
         },
-        //insert your line item enhancement here
-
+        {
+            $Type : 'UI.DataField',
+            Value : totalValue,
+            Label : 'Total Value'
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : deliveryDate,
+            Label : 'Delivery Date'
+        }
     ],
-
-    //the managed associations incidentStatus, category and priority provide a denormalized _code property to the root entity SafetIncidents
-    //Documentation managed associations: https://cap.cloud.sap/docs/guides/domain-models#use-managed-associations
-    //usage of aspect sap.common.codelist for the associated entities automatically provides value help support for the selection fields
-    //the entity definitions can be found in file db/schema.cds
-    //Documentation codelists: https://cap.cloud.sap/docs/cds/common#aspect-sapcommoncodelist
         
     SelectionFields : [
-        incidentStatus_code,
+        requestStatus_code,
         priority_code,
-        //insert your selection fields enhancement here
-
+        supplier_ID,
+        deliveryDate
     ],
+
+    // Default sorting by priority (High -> Medium -> Low)
+    PresentationVariant : {
+        SortOrder : [{
+            Property   : priority_code,
+            Descending : false  // 1_high < 2_medium < 3_low, so ascending order shows High first
+        }],
+        Visualizations : ['@UI.LineItem'],
+        RequestAtLeast : [priority.criticality]
+    },
+
+    // Presentation variant for chart view
+    PresentationVariant #ChartByPriority : {
+        Visualizations : ['@UI.Chart#PurchaseRequestsByPriority'],
+        SortOrder : [{
+            Property   : priority_code,
+            Descending : false
+        }]
+    },
+
+    PresentationVariant #ChartByStatus : {
+        Visualizations : ['@UI.Chart#PurchaseRequestsByStatus']
+    },
+
+    // Selection Presentation Variant combining filters and visualizations
+    SelectionPresentationVariant #TableView : {
+        SelectionVariant : {
+            SelectOptions : []
+        },
+        PresentationVariant : ![@UI.PresentationVariant]
+    },
+
+    SelectionPresentationVariant #ChartView : {
+        SelectionVariant : {
+            SelectOptions : []
+        },
+        PresentationVariant : ![@UI.PresentationVariant#ChartByPriority]
+    },
+
+    // DataPoint for priority indicator (red/yellow/green)
+    DataPoint #priorityIndicator : {
+        Value                         : priority_code,
+        Criticality                   : priority.criticality,
+        CriticalityRepresentation     : #WithoutIcon
+    },
+    
+    // DataPoint for status indicator in first column
+    DataPoint #PriorityStatus : {
+        Value       : priority_code,
+        Criticality : priority.criticality
+    },
+
+    // Chart definition for analytical view
+    Chart #PurchaseRequestsByPriority : {
+        $Type : 'UI.ChartDefinitionType',
+        Title : 'Purchase Requests Count by Priority',
+        Description : 'Number of Purchase Requests grouped by Priority',
+        ChartType : #Column,
+        Dimensions : [priorityName],
+        Measures : [recordCount],
+        MeasureAttributes : [{
+            $Type : 'UI.ChartMeasureAttributeType',
+            Measure : recordCount,
+            Role : #Axis1,
+            DataPoint : '@UI.DataPoint#CountRequests'
+        }],
+        DimensionAttributes : [{
+            $Type : 'UI.ChartDimensionAttributeType',
+            Dimension : priorityName,
+            Role : #Category
+        }]
+    },
+
+    Chart #PurchaseRequestsByStatus : {
+        $Type : 'UI.ChartDefinitionType',
+        Title : 'Total Value by Status',
+        ChartType : #Bar,
+        Dimensions : [requestStatus_code],
+        Measures : [totalValue],
+        MeasureAttributes : [{
+            $Type : 'UI.ChartMeasureAttributeType',
+            Measure : totalValue,
+            Role : #Axis1
+        }],
+        DimensionAttributes : [{
+            $Type : 'UI.ChartDimensionAttributeType',
+            Dimension : requestStatus_code,
+            Role : #Category
+        }]
+    },
 
     //	Information for the header area of an entity representation
     HeaderInfo : {
-        TypeName       : '{i18n>Incident}',
-        TypeNamePlural : '{i18n>Incidents}',
-        TypeImageUrl   : 'sap-icon://alert',
-        Title          : {Value : title},
-        Description    : {Value : ID}
+        TypeName       : 'Purchase Request',
+        TypeNamePlural : 'Purchase Requests',
+        TypeImageUrl   : 'sap-icon://cart',
+        Title          : {Value : identifier},
+        Description    : {Value : shortText}
     },
 
     //Facets for additional object header information (shown in the object page header)
@@ -68,95 +231,215 @@ annotate service.Incidents with @(UI : {
     }],
 
     //Group of fields with an optional label
-    //https://github.com/SAP/odata-vocabularies/blob/master/vocabularies/UI.md#FieldGroupType
     FieldGroup #HeaderGeneralInformation : {
         $Type : 'UI.FieldGroupType',
         Data : [
             {
-                Value : priority_code
+                Value : priority_code,
+                Label : 'Priority'
             },
             {
-                Value : incidentStatus_code
+                Value : requestStatus_code,
+                Label : 'Status'
             },
             {
-                Value : category_code
+                Value : totalValue,
+                Label : 'Total Value'
             },
             {
                 $Type  : 'UI.DataFieldForAnnotation',
-                Target : 'assignedIndividual/@Communication.Contact',
-                Label  : '{i18n>AssignedContact}'
+                Target : 'contactPerson/@Communication.Contact',
+                Label  : 'Contact Person'
             }
         ]
     },
 
-    FieldGroup #IncidentDetails : {
+    FieldGroup #PurchaseRequestDetails : {
         $Type : 'UI.FieldGroupType',
         Data : [
             {
                 $Type : 'UI.DataField',
-                Value : identifier
+                Value : identifier,
+                Label : 'PR Number'
             },
             {
                 $Type : 'UI.DataField',
-                Value : title
+                Value : purchaseOrder,
+                Label : 'PO Number'
             },
-            //insert your field group enhancement here 
-            
+            {
+                $Type : 'UI.DataField',
+                Value : project,
+                Label : 'Project'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : material,
+                Label : 'Material'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : shortText,
+                Label : 'Description'
+            }
        ]
     },
 
-    //insert your new field group here
+    FieldGroup #QuantityAndPrice : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : purchaseQuantity,
+                Label : 'Purchase Quantity'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : orderUnit_code,
+                Label : 'Order Unit'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : price,
+                Label : 'Price'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : currency_code,
+                Label : 'Currency'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : totalValue,
+                Label : 'Total Value'
+            }
+        ]
+    },
 
+    FieldGroup #DateInformation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : requestDate,
+                Label : 'Request Date'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : approvalDate,
+                Label : 'Approval Date'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : deliveryDate,
+                Label : 'Delivery Date'
+            }
+        ]
+    },
+
+    FieldGroup #OrganizationDetails : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : supplier_ID,
+                Label : 'Supplier'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : frameworkAgreement,
+                Label : 'Framework Agreement'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : purchasingOrganization,
+                Label : 'Purchasing Organization'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : purchasingGroup,
+                Label : 'Purchasing Group'
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : deliveryAddress,
+                Label : 'Delivery Address'
+            }
+        ]
+    },
 
     //object page content area is organized by facets referring to e.g. fieldgroup and lineItem annotations
-    //https://github.com/SAP/odata-vocabularies/blob/master/vocabularies/UI.md#Facet    
     Facets : [
         {
             $Type  : 'UI.CollectionFacet',
-            Label  : '{i18n>IncidentOverview}',
-            ID     : 'IncidentOverviewFacet',
+            Label  : 'Purchase Request Overview',
+            ID     : 'PurchaseRequestOverviewFacet',
             Facets : [
                 {
                     $Type  : 'UI.ReferenceFacet',
-                    Label  : '{i18n>IncidentDetails}',
-                    ID     : 'IncidentDetailsFacet',
-                    Target : '@UI.FieldGroup#IncidentDetails'
+                    Label  : 'Request Details',
+                    ID     : 'PurchaseRequestDetailsFacet',
+                    Target : '@UI.FieldGroup#PurchaseRequestDetails'
                 },
-                //insert your reference facet enhancement here
-
+                {
+                    $Type  : 'UI.ReferenceFacet',
+                    Label  : 'Quantity & Price',
+                    ID     : 'QuantityAndPriceFacet',
+                    Target : '@UI.FieldGroup#QuantityAndPrice'
+                },
+                {
+                    $Type  : 'UI.ReferenceFacet',
+                    Label  : 'Date Information',
+                    ID     : 'DateInformationFacet',
+                    Target : '@UI.FieldGroup#DateInformation'
+                },
+                {
+                    $Type  : 'UI.ReferenceFacet',
+                    Label  : 'Organization Details',
+                    ID     : 'OrganizationDetailsFacet',
+                    Target : '@UI.FieldGroup#OrganizationDetails'
+                }
             ]
         },
-        //this facet shows a table on the object page by referring to a lineItem annotation via association incidentFlow
-        //the referred LineItem annotation definition for entity IncidentFlow is defined below
+        //this facet shows a table on the object page by referring to a lineItem annotation via association purchaseFlow
         {
             $Type         : 'UI.ReferenceFacet',
-            Label         : '{i18n>IncidentProcessFlow}',
+            Label         : 'Purchase Process Flow',
             ID            : 'ProcessFlowFacet',
-            Target        : 'incidentFlow/@UI.LineItem',
+            Target        : 'purchaseFlow/@UI.LineItem',
         }
     ]
 });
 
-annotate service.IncidentFlow with @(UI : {
+annotate service.PurchaseFlow with @(UI : {
     LineItem : [
-        //insert your column enhancement here
-        
         {
             $Type : 'UI.DataField',
-            Value : processStep
+            Value : stepStatus,
+            Criticality : criticality,
+            Label : 'Status'
         },
         {
             $Type : 'UI.DataField',
-            Value : stepStartDate
+            Value : processStep,
+            Label : 'Process Step'
         },
         {
             $Type : 'UI.DataField',
-            Value : stepEndDate
+            Value : stepStartDate,
+            Label : 'Start Date'
         },
         {
             $Type : 'UI.DataField',
-            Value : incident.assignedIndividual.fullName,
-            Label : '{i18n>CreatedBy}'
+            Value : stepEndDate,
+            Label : 'End Date'
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : purchaseRequest.contactPerson.fullName,
+            Label : 'Contact Person'
         }
     ]
 });
+
+// Communication.Contact annotation for contact person is defined in srv/common.cds
